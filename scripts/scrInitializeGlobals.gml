@@ -13,6 +13,10 @@ global.savePlayerY = 0;
 global.grav = 1;
 global.saveGrav = 1;
 
+global.playerExperience = 0;
+global.playerLevel = 1;
+global.damage = power((global.playerLevel / 10) + 1,1.5)
+
 for (var i = global.secretItemTotal-1; i >= 0; i--)
 {
     global.secretItem[i] = false;
@@ -24,6 +28,16 @@ for (var i = global.bossItemTotal-1; i >= 0; i--)
     global.bossItem[i] = false;
     global.saveBossItem[i] = false;
 }
+
+
+for (var rm = 0; rm < 250; rm++)
+{
+    for (var idd = 0; idd < 10; idd++)
+    {
+        global.enemyKilled[rm,idd] = false; // [current room , enemy id]
+    }
+}
+
 
 global.gameClear = false;
 global.saveGameClear = false;
@@ -42,7 +56,11 @@ global.infJump = false;         //keeps track of whether to give the player infi
 global.gamePaused = false;      //keeps track of whether the game is paused or not
 global.pauseSurf = -1;       //stores the screen surface when the game is paused
 global.pauseDelay = 0;      //sets pause delay so that the player can't quickly pause buffer
+
 global.transitioning = false; //checks if there's a transition happening, if there is you can't restart
+global.shakeTimer = 0;        //screen shake timer
+global.shakeMagnitude = 0;    //magnitude of shake
+global.shakeLength = 0;       // maximum length of shake
 
 global.currentMusicID = -1;  //keeps track of what song the current music is
 global.currentMusic = -1;    //keeps track of current main music instance

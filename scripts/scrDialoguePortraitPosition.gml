@@ -1,5 +1,6 @@
-if distance_to_object(objPlayer) <= 6
+if (place_meeting(x,y,objPlayer) and npc != 2 and speaker[type,speakerCurrent] != "") or (npc = 2 and speaker[type,speakerCurrent] != "")
 {
+    maxLength = 635;
     if interact = false
     {
         view_visible[1] = true;
@@ -20,9 +21,16 @@ if distance_to_object(objPlayer) <= 6
     
     view_wport[1] = 96;
     view_hport[1] = 96;
+    /*
     if instance_exists(objPlayer) and speaker[type,speakerCurrent] = "Kid"
     {
         xx = objPlayer.x - 6;
         yy = objPlayer.y - 12;
     }
+    */
+}
+else if speaker[type,speakerCurrent] = ""
+{
+    maxLength = 760;
+    view_visible[1] = false;
 }

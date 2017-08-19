@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>10</depth>
   <persistent>0</persistent>
-  <parentName>objRoomChanger</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -78,7 +78,11 @@ smoothTransition = true;   //sets whether the player wraps around the screen for
             other.y -= room_height;
         }
         
-        room_goto(roomTo);
+        if !instance_exists(objSlideTransition)
+        {
+            instance_create(0,0,objSlideTransition);
+            room_goto(roomTo);
+        }
     }
 }
 </string>

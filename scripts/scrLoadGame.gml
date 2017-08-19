@@ -37,6 +37,8 @@ if (loadFile)
         global.savePlayerX = ds_map_find_value(saveMap,"savePlayerX");
         global.savePlayerY = ds_map_find_value(saveMap,"savePlayerY");
         global.saveGrav = ds_map_find_value(saveMap,"saveGrav");
+        global.savePlayerLevel = ds_map_find_value(saveMap,"savePlayerLevel");
+        global.savePlayerExperience = ds_map_find_value(saveMap,"savePlayerExperience");
         
         if (is_string(global.saveRoom))   //check if the saved room loaded properly
         {
@@ -58,6 +60,14 @@ if (loadFile)
             global.saveBossItem[i] = ds_map_find_value(saveMap,"saveBossItem["+string(i)+"]");
         }
         
+        for (var rm = 0; rm < 250; rm++)
+        {
+            for (var idd = 0; idd < 10; idd++)
+            {
+                global.saveEnemyKilled[rm,idd] = ds_map_find_value(saveMap,"saveEnemyKilled[" + string(rm) + "," + string(idd) + "]")
+            }
+        }
+                
         global.saveGameClear = ds_map_find_value(saveMap,"saveGameClear");
         
         //load md5 string from the save map
@@ -115,6 +125,17 @@ for (var i = 0; i < global.bossItemTotal; i++)
 {
     global.bossItem[i] = global.saveBossItem[i];
 }
+
+for (var rm = 0; rm < 250; rm++)
+{
+    for (var idd = 0; idd < 10; idd++)
+    {
+        global.enemyKilled[rm,idd] = global.saveEnemyKilled[rm,idd];
+    }
+}
+
+global.playerLevel = global.savePlayerLevel;
+global.playerExperience = global.savePlayerExperience;
 
 global.gameClear = global.saveGameClear;
 

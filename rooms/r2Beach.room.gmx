@@ -4,7 +4,7 @@
   <width>800</width>
   <height>608</height>
   <vsnap>32</vsnap>
-  <hsnap>32</hsnap>
+  <hsnap>400</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
@@ -12,7 +12,7 @@
   <showcolour>-1</showcolour>
   <code></code>
   <enableViews>-1</enableViews>
-  <clearViewBackground>-1</clearViewBackground>
+  <clearViewBackground>0</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>0</isSet>
@@ -83,10 +83,8 @@
     <instance objName="objBeachBackground" x="0" y="608" name="inst_6E3AF4C0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objCloudCeiling" x="0" y="0" name="inst_9EFD3C98" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objCloudCeiling" x="800" y="0" name="inst_04DF8E1C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objSave" x="384" y="352" name="inst_26F5AE9E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objTextbox" x="320" y="384" name="inst_75FED449" locked="0" code="npc = 0;&#xA;message[0,0] = &quot;Alright, this is a quick test.&quot;;&#xA;message[0,1] = &quot;Not really much to say, just doing a test to see if this 2d array will work.&quot;;&#xA;message[0,2] = &quot;I hope it does.&quot;;&#xA;message[0,3] = &quot;If not i'll just go off myself.&quot;;&#xA;question[4] = true;&#xA;message[0,4] = &quot;Is it working?&quot;;&#xA;&#xA;amountOfOptions = 3;&#xA;optionText[1] = &quot;Yes&quot;;&#xA;optionText[2] = &quot;No&quot;;&#xA;optionText[3] = &quot;How am i supposed to know?&quot;;&#xA;&#xA;message[1,5] = &quot;Yeah... I think it is!&quot;;&#xA;message[1,6] = &quot;Would ya look at that, it seems to be working!&quot;;&#xA;&#xA;message[2,5] = &quot;Uh, no, sorry... I don't think it is.&quot;;&#xA;message[2,6] = &quot;Back to the drawing board it seems!&quot;;&#xA;message[2,7] = &quot;You'll get it soon enough.&quot;&#xA;&#xA;message[3,5] = &quot;I have no idea, do you think i'm just gonna break the fourth wall like that?&quot;;&#xA;message[3,6] = &quot;For shame, developer... For shame!&quot;;&#xA;&#xA;messageEnd[0] = 4;&#xA;messageEnd[1] = 6;&#xA;messageEnd[2] = 7;&#xA;messageEnd[3] = 6;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objVinilo" x="657" y="375" name="inst_35F0955A" locked="0" code="npc = 1;&#xA;speaker[0,0] = &quot;Vinilo&quot;&#xA;message[0,0] = &quot;This way! The town is only a little bit more to the east!&quot;;&#xA;message[0,1] = &quot;At least you're able to keep up!&quot;&#xA;speaker[0,2] = &quot;Kid&quot;;&#xA;message[0,2] = &quot;Yeah, thank god for that...&quot;;&#xA;speaker[0,3] = &quot;Vinilo&quot;;&#xA;question[3] = true;&#xA;message[0,3] = &quot;So, Kid... Where are ya from?&quot;;&#xA;messageEnd[0] = 3;&#xA;&#xA;amountOfOptions = 5;&#xA;optionText[1] = &quot;No Idea&quot;;&#xA;optionText[2] = &quot;Make Up A Lie&quot;;&#xA;optionText[3] = &quot;test3&quot;;&#xA;optionText[4] = &quot;test4&quot;;&#xA;optionText[5] = &quot;test5&quot;&#xA;&#xA;speaker[1,4] = &quot;Kid&quot;;&#xA;message[1,4] = &quot;You know what... If i knew, i'd tell ya.&quot;;&#xA;message[1,5] = &quot;I don't even remember that much! Sorry.&quot;;&#xA;speaker[1,6] = &quot;Vinilo&quot;;&#xA;message[1,6] = &quot;It's fine, it's fine... It'll come back to you, i'm sure!&quot;;&#xA;messageEnd[1] = 6;&#xA;&#xA;speaker[2,4] = &quot;Kid&quot;;&#xA;message[2,4] = &quot;I come from a mystical land from far away! It's called 'Elision'.&quot;;&#xA;speaker[2,5] = &quot;Vinilo&quot;;&#xA;message[2,5] = &quot;You're just spinning lies, aren't you?&quot;;&#xA;speaker[2,6] = &quot;Kid&quot;;&#xA;message[2,6] = &quot;Yep... No idea, sorry.&quot;;&#xA;speaker[2,7] = &quot;Vinilo&quot;;&#xA;message[2,7] = &quot;Uh-huh... Well, at any rate, i'm sure it'll come back to you.&quot;;&#xA;messageEnd[2] = 7;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objPlayerStart" x="512" y="384" name="inst_8F25B945" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objCloudCeiling" x="400" y="0" name="inst_78A0CEF4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objCloudCeiling" x="-400" y="0" name="inst_AB434F09" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bTilesBeach" x="0" y="480" w="32" h="32" xo="32" yo="0" id="10001339" name="inst_8E715FE1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -217,6 +215,11 @@
     <tile bgName="bTilesBeach" x="224" y="480" w="32" h="32" xo="160" yo="96" id="10001478" name="inst_8426666D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="224" y="544" w="64" h="64" xo="128" yo="64" id="10001978" name="inst_D9D163D2" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="736" y="448" w="64" h="64" xo="128" yo="64" id="10001979" name="inst_54C0E9BC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bBush" x="8" y="428" w="214" h="52" xo="0" yo="0" id="10002187" name="inst_3ED4CF2E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bPinkFlowers1" x="555" y="384" w="65" h="65" xo="0" yo="0" id="10002188" name="inst_CD3EBFCE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bWhiteFlowers1" x="475" y="402" w="82" h="47" xo="0" yo="0" id="10002189" name="inst_80FF580A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bWhiteFlowers2" x="256" y="371" w="102" h="45" xo="0" yo="0" id="10002190" name="inst_E21A1B7F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bPinkFlowers2" x="704" y="343" w="94" h="41" xo="0" yo="0" id="10002191" name="inst_FE1FF093" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>

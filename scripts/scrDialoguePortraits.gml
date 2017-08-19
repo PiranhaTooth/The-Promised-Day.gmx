@@ -1,68 +1,29 @@
-if place_meeting(x,y,objPlayer)
+if (npc != 2 and pressed = true) or (npc = 2)
 {
-    if instance_exists(objPlayer)
+    if speaker[type,speakerCurrent] != ""
     {
-        // The Kid
-        if speaker[type,speakerCurrent] = "Kid"
+        draw_sprite_ext(sprite,speakerObject.image_index,view_xview[0] + 711.5,view_yview[0] + 44,speakerObject.image_xscale,speakerObject.image_yscale,0,c_white,speakerObject.image_alpha);
+    }
+    switch speaker[type,speakerCurrent]
+    {
+        case "Kid":
         {
-            with objPlayer
+            sprite = sprKidPortrait;
+            if instance_exists(objPlayer)
             {
-                draw_self();
+                speakerObject = objPlayer;
             }
-            xx = objPlayer.x - 6;
-            yy = objPlayer.y - 12;
-        }
-        else
-        {
-            //do nothing
-        }
+            else
+            {
+                speakerObject = objKid;
+            }
+        }break;
         
-        // Sam
-        if view_current = 1
+        case "Vinilo":
         {
-            if speaker[type,speakerCurrent] = "Sam"
-            {
-                with objSam
-                {
-                    draw_self();
-                }
-                xx = objSam.x - 6;
-                yy = objSam.y - 12;
-            }
-            else
-            {
-                //do nothing
-            }
-            
-            // Vinilo
-            if speaker[type,speakerCurrent] = "Vinilo"
-            {
-                with objVinilo
-                {
-                    draw_self();
-                }
-                xx = objVinilo.x - 6;
-                yy = objVinilo.y - 12;
-            }
-            else
-            {
-                //do nothing
-            }
-    
-            //Bizzle
-            if speaker[type,speakerCurrent] = "Bizzle"
-            {
-                with objBizzle
-                {
-                    draw_self();
-                }
-                xx = objBizzle.x - 6;
-                yy = objBizzle.y - 12;
-            }
-            else
-            {
-                //do nothing
-            }
-        }
+            sprite = sprViniloPortrait;
+            speakerObject = objVinilo;
+        }break;
     }
 }
+

@@ -9,10 +9,14 @@ type = 0;
 
 response = 0;
 pressed = false;
-interact = false;
 select = 1;
-characterReset = false;          
-if objPlayer.frozen = 1
-{
+characterReset = false;  
+if instance_exists(objPlayer)
+{        
     objPlayer.frozen = 0;
-}         
+}
+   
+if interact = false
+{
+    interact = true;
+}

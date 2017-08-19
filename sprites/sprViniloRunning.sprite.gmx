@@ -8,7 +8,7 @@
   <sepmasks>-1</sepmasks>
   <bboxmode>0</bboxmode>
   <bbox_left>3</bbox_left>
-  <bbox_right>23</bbox_right>
+  <bbox_right>27</bbox_right>
   <bbox_top>11</bbox_top>
   <bbox_bottom>31</bbox_bottom>
   <HTile>0</HTile>
@@ -20,9 +20,9 @@
   <width>32</width>
   <height>32</height>
   <frames>
-    <frame index="0">images\sprVinilo_0.png</frame>
-    <frame index="1">images\sprVinilo_1.png</frame>
-    <frame index="2">images\sprVinilo_2.png</frame>
-    <frame index="3">images\sprVinilo_3.png</frame>
+    <frame index="0">images\sprViniloRunning_0.png</frame>
+    <frame index="1">images\sprViniloRunning_1.png</frame>
+    <frame index="2">images\sprViniloRunning_2.png</frame>
+    <frame index="3">images\sprViniloRunning_3.png</frame>
   </frames>
 </sprite>

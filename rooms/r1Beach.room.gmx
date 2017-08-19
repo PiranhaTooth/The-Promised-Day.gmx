@@ -4,14 +4,14 @@
   <width>800</width>
   <height>608</height>
   <vsnap>32</vsnap>
-  <hsnap>32</hsnap>
+  <hsnap>400</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
   <colour>14606244</colour>
   <showcolour>-1</showcolour>
   <code></code>
-  <enableViews>0</enableViews>
+  <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
@@ -41,7 +41,7 @@
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
   </backgrounds>
   <views>
-    <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
+    <view visible="-1" objName="&lt;undefined&gt;" xview="0" yview="0" wview="800" hview="608" xport="0" yport="0" wport="800" hport="608" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
@@ -51,7 +51,7 @@
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
   <instances>
-    <instance objName="objTextbox" x="0" y="0" name="inst_356D011D" locked="0" code="npc = 2;&#xA;message[0] = &quot;Uhm... Excuse me sir?&quot;;&#xA;message[1] = &quot;Are- are you alright there?&quot;;&#xA;action[1] = true;&#xA;object[1] = objR1BeachController1;&#xA;message[2] = &quot;Ah, thank the stars, you're awake! I thought you might've been dead!&quot;;&#xA;message[3] = &quot;Wh- where am I? How did I get here?&quot;&#xA;message[4] = &quot;I myself have no idea! But uh- on the way here I crossed paths with a woman, she said her name was Zeller... Anyone you may know?&quot;;&#xA;message[5] = &quot;Zel- Zeller... Zeller who?&quot;&#xA;message[6] = &quot;You seem sort of confused! Don't worry, I am too! It's not exactly very common we get visitors around these parts. Do you uhh... happen to have any idea as to how you got here?&quot;;&#xA;message[7] = &quot;No... No I... don't, sorry. I remember I was scared... really scared!&quot;;&#xA;message[8] = &quot;Oh well, no harm I guess. I mean, you're here now and you seem to be okay! Uh... You are okay, aren't you?&quot;&#xA;//action[8] = true;&#xA;//object[8] = objR1BeachController2;&#xA;message[9] = &quot;Yeah, yeah... I'm... fine, thanks!&quot;&#xA;message[10] = &quot;Let's get you back to the town, see if we can get your memory jogging.&quot;&#xA;messageEnd = 10;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objTextbox" x="0" y="0" name="inst_356D011D" locked="0" code="npc = 2;&#xA;message[0,0] = &quot;Uhm... Excuse me sir?&quot;;&#xA;&#xA;message[0,1] = &quot;Are- are you alright there?&quot;;&#xA;action[0,1] = true;&#xA;actionObject[0,1] = objR1BeachController1;&#xA;&#xA;speaker[0,2] = &quot;Vinilo&quot;;&#xA;message[0,2] = &quot;Ah, thank the stars, you're awake! I thought you might've been dead!&quot;;&#xA;&#xA;speaker[0,3] = &quot;Kid&quot;;&#xA;message[0,3] = &quot;Wh- where am I? How did I get here?&quot;;&#xA;&#xA;speaker[0,4] = &quot;Vinilo&quot;;&#xA;message[0,4] = &quot;I myself have no idea! I was just on my way out to the beachfront to indulge in some fishing!&quot;;&#xA;&#xA;message[0,5] = &quot;You seem sort of confused! Don't worry, I am too! It's not exactly very common we get visitors around these parts. Do you uhh... happen to have any idea as to how you got here?&quot;;&#xA;&#xA;speaker[0,6] = &quot;Kid&quot;;&#xA;message[0,6] = &quot;No... No I... don't, sorry. I remember I was scared... really scared!&quot;;&#xA;&#xA;speaker[0,7] = &quot;Vinilo&quot;;&#xA;message[0,7] = &quot;Oh, I see... No harm I guess. I mean, you're here now and you seem to be okay! Uh... You are okay, aren't you?&quot;;&#xA;&#xA;speaker[0,8] = &quot;Kid&quot;;&#xA;message[0,8] = &quot;Yeah, yeah... I'm... fine, thanks!&quot;;&#xA;&#xA;message[0,9] = &quot;*So kind! He's only just met me and he's already making sure I'm okay... I think this guy is someone I could come to trust.*&quot;&#xA;&#xA;speaker[0,10] = &quot;Vinilo&quot;;&#xA;message[0,10] = &quot;At any rate, Let's get you back to the town, see if maybe some familiar sights can get your memory jogging!&quot;;&#xA;&#xA;speaker[0,11] = &quot;Kid&quot;; &#xA;message[0,11] = &quot;Yeah, alright. Lead the way!&quot;;&#xA;action[0,11] = true;&#xA;actionObject[0,11] = objR1BeachController2;&#xA;&#xA;messageEnd[0] = 11;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlackRectangle" x="0" y="608" name="inst_319D8D30" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="0" y="480" name="inst_1F698E1B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="32" y="480" name="inst_F2F3F72A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -61,13 +61,12 @@
     <instance objName="objBlock" x="160" y="448" name="inst_566F9E0C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="192" y="448" name="inst_191F82E0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="224" y="448" name="inst_D8EA528E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="224" y="480" name="inst_48F36047" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="256" y="512" name="inst_1D5258D3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="288" y="512" name="inst_9A906466" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="320" y="512" name="inst_B79A1B5A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="352" y="512" name="inst_6FB5B2FD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="384" y="512" name="inst_2C875AD3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="416" y="512" name="inst_7BD64B9D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objBlock" x="256" y="480" name="inst_1D5258D3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objBlock" x="288" y="480" name="inst_9A906466" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objBlock" x="320" y="480" name="inst_B79A1B5A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objBlock" x="352" y="480" name="inst_6FB5B2FD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objBlock" x="384" y="480" name="inst_2C875AD3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objBlock" x="416" y="480" name="inst_7BD64B9D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="448" y="480" name="inst_E784F58E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="480" y="480" name="inst_FB0255CB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="512" y="480" name="inst_142BC7F0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -80,18 +79,20 @@
     <instance objName="objBlock" x="736" y="480" name="inst_04F3E4A0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="768" y="480" name="inst_6674973D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBackgroundSun" x="656" y="144" name="inst_7B77AEC0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objPlayerStart" x="272" y="480" name="inst_26F1724F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBeachBackground" x="0" y="250" name="inst_7DCAA00B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objPlayerStart" x="272" y="448" name="inst_26F1724F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objBeachBackground" x="0" y="608" name="inst_7DCAA00B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objOutsideRoomChanger" x="800" y="0" name="inst_1DC6E963" locked="0" code="roomTo = r2Beach;&#xA;" scaleX="1" scaleY="15" colour="4294967295" rotation="0"/>
     <instance objName="objOutsideRoomChanger" x="-32" y="0" name="inst_B2B17142" locked="0" code="roomTo = rBeachFront;&#xA;" scaleX="1" scaleY="15" colour="4294967295" rotation="0"/>
-    <instance objName="objCloudCeiling" x="0" y="0" name="inst_BFA42878" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objCloudCeiling" x="0" y="32" name="inst_BFA42878" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objCloudCeiling" x="800" y="0" name="inst_954C4E55" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objVinilo" x="310" y="471" name="inst_E302466B" locked="0" code="npc = 1;&#xA;speaker[0,1] = &quot;Vinilo&quot;;&#xA;message[0,1] = &quot;Come on! It's this way!&quot;;&#xA;&#xA;speaker[0,2] = &quot;Kid&quot;;&#xA;message[0,2] = &quot;Lead the way!&quot;;&#xA;&#xA;messageEnd[0] = 2;&#xA;" scaleX="-1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objCloudCeiling" x="400" y="0" name="inst_EAFE784E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objCloudCeiling" x="-400" y="32" name="inst_91F2EAA6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
-    <tile bgName="bTilesBeach" x="256" y="512" w="32" h="32" xo="32" yo="0" id="10001216" name="inst_FD9B88BF" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bTilesBeach" x="288" y="512" w="32" h="32" xo="32" yo="0" id="10001217" name="inst_37DA2FC5" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bTilesBeach" x="320" y="512" w="32" h="32" xo="32" yo="0" id="10001218" name="inst_A4A359B1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bTilesBeach" x="448" y="480" w="32" h="32" xo="0" yo="0" id="10001223" name="inst_5E0DC04B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="256" y="480" w="32" h="32" xo="32" yo="0" id="10001216" name="inst_FD9B88BF" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="288" y="480" w="32" h="32" xo="32" yo="0" id="10001217" name="inst_37DA2FC5" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="320" y="480" w="32" h="32" xo="32" yo="0" id="10001218" name="inst_A4A359B1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="480" y="480" w="32" h="32" xo="32" yo="0" id="10001225" name="inst_A6DEEECA" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="512" y="480" w="32" h="32" xo="32" yo="0" id="10001226" name="inst_0B329968" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="544" y="480" w="32" h="32" xo="32" yo="0" id="10001227" name="inst_D233421D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -102,10 +103,9 @@
     <tile bgName="bTilesBeach" x="704" y="480" w="32" h="32" xo="32" yo="0" id="10001232" name="inst_42DD7B36" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="736" y="480" w="32" h="32" xo="32" yo="0" id="10001233" name="inst_E0E8CC8A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="768" y="480" w="32" h="32" xo="32" yo="0" id="10001235" name="inst_760CE93E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bTilesBeach" x="352" y="512" w="32" h="32" xo="32" yo="0" id="10001236" name="inst_3944B27C" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bTilesBeach" x="384" y="512" w="32" h="32" xo="32" yo="0" id="10001237" name="inst_F9ED52E1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bTilesBeach" x="416" y="512" w="32" h="32" xo="32" yo="0" id="10001238" name="inst_4C28CEA3" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bTilesBeach" x="448" y="512" w="32" h="32" xo="160" yo="96" id="10001240" name="inst_51610DF8" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="352" y="480" w="32" h="32" xo="32" yo="0" id="10001236" name="inst_3944B27C" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="384" y="480" w="32" h="32" xo="32" yo="0" id="10001237" name="inst_F9ED52E1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="416" y="480" w="32" h="32" xo="32" yo="0" id="10001238" name="inst_4C28CEA3" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="0" y="544" w="32" h="32" xo="32" yo="32" id="10001241" name="inst_20E4ABCF" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="0" y="576" w="32" h="32" xo="32" yo="32" id="10001242" name="inst_FC5A8411" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="32" y="576" w="32" h="32" xo="32" yo="32" id="10001243" name="inst_433D17CD" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -168,19 +168,31 @@
     <tile bgName="bTilesBeach" x="64" y="512" w="32" h="32" xo="32" yo="32" id="10001322" name="inst_FAA2B632" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="160" y="512" w="32" h="32" xo="32" yo="32" id="10001325" name="inst_A7CFE30D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="192" y="512" w="32" h="32" xo="32" yo="32" id="10001326" name="inst_D29FF68F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bTilesBeach" x="224" y="512" w="32" h="32" xo="128" yo="96" id="10001328" name="inst_090C0348" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="224" y="448" w="32" h="32" xo="64" yo="0" id="10001329" name="inst_9FE1B461" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="96" y="448" w="32" h="32" xo="0" yo="0" id="10001330" name="inst_6E056067" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="128" y="448" w="32" h="32" xo="32" yo="0" id="10001331" name="inst_F0DDCF78" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="160" y="448" w="32" h="32" xo="32" yo="0" id="10001332" name="inst_D4A30991" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="192" y="448" w="32" h="32" xo="32" yo="0" id="10001333" name="inst_7D020DDF" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bTilesBeach" x="224" y="480" w="32" h="32" xo="64" yo="32" id="10001334" name="inst_CBF6D4AB" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="96" y="480" w="32" h="32" xo="160" yo="96" id="10001335" name="inst_D645B30D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="128" y="480" w="32" h="32" xo="32" yo="32" id="10001336" name="inst_4E4FA3B2" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="160" y="480" w="32" h="32" xo="32" yo="32" id="10001337" name="inst_09DF53B5" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="192" y="480" w="32" h="32" xo="32" yo="32" id="10001338" name="inst_41C7A842" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="96" y="512" w="64" h="64" xo="128" yo="64" id="10001980" name="inst_4866CABC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="672" y="544" w="64" h="64" xo="128" yo="64" id="10001981" name="inst_7F7586D0" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="448" y="480" w="32" h="32" xo="32" yo="0" id="10002098" name="inst_3EA433AB" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="224" y="512" w="32" h="32" xo="32" yo="32" id="10002099" name="inst_6F657510" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="256" y="512" w="32" h="32" xo="32" yo="32" id="10002100" name="inst_23260E48" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="288" y="512" w="32" h="32" xo="32" yo="32" id="10002101" name="inst_9BC90C48" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="320" y="512" w="32" h="32" xo="32" yo="32" id="10002102" name="inst_DDF675F7" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="352" y="512" w="32" h="32" xo="32" yo="32" id="10002103" name="inst_9192D56F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="384" y="512" w="32" h="32" xo="32" yo="32" id="10002104" name="inst_3F53141E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="416" y="512" w="32" h="32" xo="32" yo="32" id="10002105" name="inst_CA83C7FF" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="448" y="512" w="32" h="32" xo="32" yo="32" id="10002106" name="inst_BD47D04D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bTilesBeach" x="224" y="480" w="32" h="32" xo="128" yo="96" id="10002107" name="inst_B1F5993D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bWhiteFlowers2" x="165" y="403" w="102" h="45" xo="0" yo="0" id="10002193" name="inst_87495184" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bBush" x="375" y="428" w="214" h="52" xo="0" yo="0" id="10002195" name="inst_E1E68845" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bPinkFlowers2" x="329" y="439" w="94" h="41" xo="0" yo="0" id="10002197" name="inst_AC6613E7" depth="999999" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bWhiteFlowers3" x="603" y="449" w="35" h="31" xo="0" yo="0" id="10002198" name="inst_9B4C434C" depth="999999" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>

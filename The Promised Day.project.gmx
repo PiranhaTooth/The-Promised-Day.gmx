@@ -20,6 +20,12 @@
       <sound>sound\sndGlass</sound>
       <sound>sound\sndSpikeTrap</sound>
       <sound>sound\sndDialogue</sound>
+      <sound>sound\sndLevelUp</sound>
+      <sounds name="Boss1">
+        <sound>sound\sndBoss1Summon</sound>
+        <sound>sound\sndBoss1Rumble</sound>
+        <sound>sound\sndBoss1Spawn</sound>
+      </sounds>
     </sounds>
     <sounds name="music">
       <sound>sound\musOnDeath</sound>
@@ -31,6 +37,16 @@
       <sound>sound\musMenu</sound>
       <sound>sound\musBeach</sound>
       <sound>sound\musBeachTown</sound>
+      <sound>sound\musGrasslands</sound>
+      <sound>sound\musBoss1</sound>
+    </sounds>
+    <sounds name="Enemies">
+      <sounds name="slime">
+        <sound>sound\sndSlimeJump</sound>
+        <sound>sound\sndSlimeShoot</sound>
+        <sound>sound\sndSlimeHit</sound>
+        <sound>sound\sndSlimeDeath</sound>
+      </sounds>
     </sounds>
   </sounds>
   <sprites name="sprites">
@@ -40,6 +56,7 @@
       <sprite>sprites\sprPlayerKiller</sprite>
       <sprite>sprites\sprPlayerStart</sprite>
       <sprite>sprites\sprSelector</sprite>
+      <sprite>sprites\sprite113</sprite>
     </sprites>
     <sprites name="player">
       <sprite>sprites\sprPlayerMask</sprite>
@@ -104,6 +121,7 @@
       <sprite>sprites\sprSign</sprite>
       <sprite>sprites\sprGravityUp</sprite>
       <sprite>sprites\sprGravityDown</sprite>
+      <sprite>sprites\sprLevelUp</sprite>
     </sprites>
     <sprites name="triggers">
       <sprite>sprites\sprTriggerMask</sprite>
@@ -159,15 +177,59 @@
       <sprite>sprites\sprSun</sprite>
     </sprites>
     <sprites name="npcs">
-      <sprite>sprites\sprVinilo</sprite>
+      <sprites name="Vinilo">
+        <sprite>sprites\sprViniloPortrait</sprite>
+        <sprite>sprites\sprViniloIdle</sprite>
+        <sprite>sprites\sprViniloRunning</sprite>
+      </sprites>
+      <sprite>sprites\sprKidPortrait</sprite>
       <sprite>sprites\sprBizzle</sprite>
       <sprite>sprites\sprSam</sprite>
     </sprites>
-    <sprite>sprites\WHEEZE</sprite>
-    <sprite>sprites\sprite97</sprite>
-    <sprite>sprites\sprite104</sprite>
-    <sprite>sprites\sprite105</sprite>
-    <sprite>sprites\sprite108</sprite>
+    <sprites name="Enemies">
+      <sprites name="Slime">
+        <sprite>sprites\sprSlimeIdle</sprite>
+        <sprite>sprites\sprSlimeJump</sprite>
+        <sprite>sprites\sprSlimeDeath</sprite>
+        <sprite>sprites\sprSlimeball</sprite>
+      </sprites>
+    </sprites>
+    <sprites name="Healthbar">
+      <sprite>sprites\sprHealthbarInner</sprite>
+      <sprite>sprites\sprHealthbarBorder</sprite>
+      <sprite>sprites\sprHealthbarBg</sprite>
+    </sprites>
+    <sprites name="Random shit">
+      <sprite>sprites\sprite102</sprite>
+      <sprite>sprites\sprite103</sprite>
+      <sprite>sprites\sprite108</sprite>
+      <sprite>sprites\sprite105</sprite>
+      <sprite>sprites\sprite104</sprite>
+      <sprite>sprites\sprite97</sprite>
+      <sprite>sprites\WHEEZE</sprite>
+      <sprite>sprites\sprite99</sprite>
+    </sprites>
+    <sprites name="Boss1">
+      <sprite>sprites\sprSlimeStatue</sprite>
+      <sprite>sprites\sprBoss1</sprite>
+      <sprite>sprites\sprBoss1Jump</sprite>
+      <sprite>sprites\sprBoss1Attack1Indicator</sprite>
+      <sprites name="Attack Spawns / Summons">
+        <sprite>sprites\sprBoss1Spawn</sprite>
+        <sprite>sprites\sprBoss1Attack2Intro1</sprite>
+        <sprite>sprites\sprBoss1Attack2Intro2</sprite>
+        <sprite>sprites\sprBoss1Attack2Intro3</sprite>
+        <sprite>sprites\sprBoss1Attack2Summon</sprite>
+        <sprite>sprites\sprBoss1Attack3Summon</sprite>
+        <sprite>sprites\sprBoss1WarningTriangle</sprite>
+        <sprite>sprites\sprBoss1Attack4Circle</sprite>
+      </sprites>
+    </sprites>
+    <sprite>sprites\sprTest</sprite>
+    <sprite>sprites\sprite125</sprite>
+    <sprite>sprites\sprBoss1Bullet</sprite>
+    <sprite>sprites\sprite129</sprite>
+    <sprite>sprites\bullet_sprite_sheet</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bAllTiles</background>
@@ -179,8 +241,15 @@
     <backgrounds name="houses">
       <background>background\bHouse1</background>
       <background>background\bHouse2</background>
+      <background>background\bHouse1Inside</background>
+      <background>background\background24</background>
     </backgrounds>
     <background>background\background11</background>
+    <background>background\bGrasslandsTiles</background>
+    <background>background\background25</background>
+    <background>background\bGrasslands</background>
+    <background>background\bTiles</background>
+    <background>background\bBackgroundTiles</background>
     <backgrounds name="aesthetic">
       <background>background\bWhiteBorder</background>
       <background>background\bBlackBorder</background>
@@ -230,8 +299,8 @@
     </scripts>
     <scripts name="functions">
       <script>scripts\scrDrawTextOutline.gml</script>
-      <script>scripts\scrMakeShapes.gml</script>
-      <script>scripts\scrMakeCircle.gml</script>
+      <script>scripts\scrScreenShake.gml</script>
+      <script>scripts\scrWave.gml</script>
     </scripts>
     <scripts name="rain">
       <script>scripts\rain_set_drop_count.gml</script>
@@ -240,12 +309,20 @@
     <scripts name="dialogue">
       <script>scripts\scrTouchDialogue.gml</script>
       <script>scripts\scrNPCDialogue.gml</script>
-      <script>scripts\scrCutsceneDialogue.gml</script>
-      <script>scripts\scrDialogueOptions.gml</script>
-      <script>scripts\scrDialoguePortraitPosition.gml</script>
       <script>scripts\scrDialoguePortraits.gml</script>
       <script>scripts\scrTextboxNext.gml</script>
       <script>scripts\scrTextboxCleanup.gml</script>
+    </scripts>
+    <scripts name="Scripts_for_smooth_moving_objects">
+      <script>scripts\Scripts_for_smooth_moving_objects.gml</script>
+      <script>scripts\EaseOutQuad.gml</script>
+      <script>scripts\EaseInQuad.gml</script>
+      <script>scripts\EaseOutCubic.gml</script>
+    </scripts>
+    <scripts name="blast attacks">
+      <script>scripts\scrMakeCircle.gml</script>
+      <script>scripts\scrMakeShapes.gml</script>
+      <script>scripts\scrMakeStar.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -349,6 +426,7 @@
       <object>objects\objSign</object>
       <object>objects\objGravityUp</object>
       <object>objects\objGravityDown</object>
+      <object>objects\objLevelUp</object>
     </objects>
     <objects name="saves">
       <object>objects\objSaveMedium</object>
@@ -358,16 +436,17 @@
       <object>objects\objSaveFlip</object>
       <object>objects\objSaveVHardFlip</object>
     </objects>
-    <objects name="warps">
+    <objects name="warps / transitions">
       <object>objects\objWarpStart</object>
       <object>objects\objRoomChanger</object>
       <object>objects\objTownTransition</object>
       <object>objects\objWarp</object>
       <object>objects\objWarpNext</object>
       <object>objects\objWarpAutosaveNext</object>
-      <object>objects\objOutsideRoomChanger</object>
       <object>objects\objBlackSquare</object>
       <object>objects\objFadeTransition</object>
+      <object>objects\objOutsideRoomChanger</object>
+      <object>objects\objSlideTransition</object>
     </objects>
     <objects name="items">
       <object>objects\objSecretItem</object>
@@ -403,6 +482,7 @@
       <object>objects\objWhiteBorder</object>
       <object>objects\objCinematicParticles</object>
       <object>objects\objWhiteFadeout</object>
+      <object>objects\objScreenShake</object>
     </objects>
     <objects name="backgrounds">
       <object>objects\objBackgroundSun</object>
@@ -411,14 +491,58 @@
     </objects>
     <objects name="dialogue">
       <object>objects\objTextbox</object>
+      <objects name="npcs">
+        <object>objects\objKid</object>
+        <object>objects\objVinilo</object>
+      </objects>
       <objects name="actions">
         <object>objects\objR1BeachController1</object>
         <object>objects\objR1BeachController2</object>
-      </objects>
-      <objects name="npcs">
-        <object>objects\objVinilo</object>
+        <object>objects\objRBossGrasslandsController1</object>
+        <object>objects\objRBossGrasslandsController2</object>
+        <object>objects\objRBossGrasslandsController3</object>
       </objects>
     </objects>
+    <objects name="Enemies / HP bar">
+      <object>objects\objHP</object>
+      <objects name="slime">
+        <object>objects\objSlimeEnemy</object>
+        <object>objects\objSlimeball</object>
+        <object>objects\objSlimeball2</object>
+      </objects>
+    </objects>
+    <objects name="Boss1">
+      <object>objects\objSlimeStatue</object>
+      <object>objects\objBoss1Intro</object>
+      <object>objects\objBoss1Spawn</object>
+      <object>objects\objBoss1</object>
+      <object>objects\objBoss1Old</object>
+      <objects name="Boss1 Attacks">
+        <object>objects\objBoss1Attack1IndicatorEffect</object>
+        <object>objects\objBoss1Attack1Indicator</object>
+        <object>objects\objBoss1Attack1</object>
+        <object>objects\objBoss1Attack1_2</object>
+        <object>objects\objBoss1Attack2Intro1</object>
+        <object>objects\objBoss1Attack2Intro2</object>
+        <object>objects\objBoss1Attack2Intro3</object>
+        <object>objects\objBoss1Attack2Intro4</object>
+        <object>objects\objBoss1Attack2Summon</object>
+        <object>objects\objBoss1Attack2</object>
+        <object>objects\objBoss1Attack2_2</object>
+        <object>objects\objBoss1Attack2_3</object>
+        <object>objects\objBoss1Attack3Summon</object>
+        <object>objects\objBoss1Attack3Warning</object>
+        <object>objects\objBoss1Attack3Left</object>
+        <object>objects\objBoss1Attack3Right</object>
+        <object>objects\objBoss1Attack3Circle</object>
+        <object>objects\objBoss1Attack4</object>
+        <object>objects\objBoss1Attack4_2</object>
+        <object>objects\objBoss1Attack4Retract</object>
+        <object>objects\objBoss1Attack4Circle</object>
+        <object>objects\objBoss1Attack4CircleEffect</object>
+      </objects>
+    </objects>
+    <object>objects\objTest</object>
   </objects>
   <rooms name="rooms">
     <rooms name="init">
@@ -436,7 +560,26 @@
         <room>rooms\r2Beach</room>
         <room>rooms\r3Beach</room>
         <room>rooms\r4Beach</room>
-        <room>rooms\rBeachTown</room>
+      </rooms>
+      <room>rooms\rBeachTown</room>
+      <rooms name="Grasslands">
+        <room>rooms\r1Grasslands</room>
+        <room>rooms\r2Grasslands</room>
+        <room>rooms\r3Grasslands</room>
+        <room>rooms\r4Grasslands</room>
+        <room>rooms\r5Grasslands</room>
+        <room>rooms\r6Grasslands</room>
+        <room>rooms\r7Grasslands</room>
+        <room>rooms\r8Grasslands</room>
+        <room>rooms\r9Grasslands</room>
+        <room>rooms\r10Grasslands</room>
+        <room>rooms\r11Grasslands</room>
+        <room>rooms\r12Grasslands</room>
+        <room>rooms\rBossGrasslands</room>
+        <room>rooms\rGrasslandsTemplate</room>
+      </rooms>
+      <rooms name="cutscenes">
+        <room>rooms\rBossGrasslandsCutscene1</room>
       </rooms>
     </rooms>
     <room>rooms\rTemplate</room>

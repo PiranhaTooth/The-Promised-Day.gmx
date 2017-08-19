@@ -46,6 +46,9 @@ if (global.autosave) //save the game if currently set to autosave
     scrSaveGame(true);
     global.autosave = false;
 }
+
+expNeeded = 0;
+animated = false;
 </string>
           </argument>
         </arguments>
@@ -445,6 +448,15 @@ if (instance_exists(objSlope) &amp;&amp; hspeed != 0)
     xprevious = x;
     yprevious = y;
 }
+
+if instance_exists(objSlideTransition)
+{
+    frozen = true;
+}
+else
+{
+    frozen = false;
+}
 </string>
           </argument>
         </arguments>
@@ -499,7 +511,10 @@ if (instance_exists(objSlope) &amp;&amp; hspeed != 0)
             y = other.y-9;
             vspeed = other.vspeed;
         }
-        
+        if keyboard_check_pressed(vk_down)
+        {
+            y += 18;
+        }                
         onPlatform = true;
         djump = 1;
     }
@@ -518,6 +533,8 @@ else    //flipped
         djump = 1;
     }
 }
+
+
 </string>
           </argument>
         </arguments>
@@ -610,6 +627,43 @@ if view_current = 0
     if (global.debugShowHitbox)
         draw_sprite_ext(mask_index,image_index,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha*0.8);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///level up / levels
+/*
+draw_text(32,32,"Level: " + string(global.playerLevel));
+draw_text(32,64,"Exp: " + string(global.playerExperience) + " / " + string(expNeeded));
+*/
+expNeeded = 100 * (1 + (global.playerLevel * 0.1));
+
+if (global.playerExperience / expNeeded) &gt;= 1
+{
+    global.playerLevel ++;
+    global.playerExperience = 0;
+    if !instance_exists(objLevelUp)
+    {
+        instance_create(x,y+8,objLevelUp);
+    }
+}
+
 </string>
           </argument>
         </arguments>

@@ -3,7 +3,7 @@
   <spriteName>sprBlackRectangle</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-11</depth>
+  <depth>-9999999</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if objTextbox.interact = true
+            <string>if objTextbox.interact = false
 {
     x = view_xview[0];
     y = view_yview[0];

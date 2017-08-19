@@ -4,7 +4,7 @@
   <width>800</width>
   <height>608</height>
   <vsnap>32</vsnap>
-  <hsnap>32</hsnap>
+  <hsnap>400</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
@@ -79,12 +79,14 @@
     <instance objName="objBlock" x="128" y="448" name="inst_0CBC7065" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="96" y="448" name="inst_4152B421" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="64" y="416" name="inst_9B650AE4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objSave" x="704" y="448" name="inst_E220B9D3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objTownTransition" x="806" y="0" name="inst_D28A7880" locked="0" code="roomTo = rBeachTown;&#xA;location = &quot;Beachside Town&quot;;&#xA;warpX = 33;&#xA;warpY = 500;&#xA;" scaleX="1" scaleY="16" colour="4294967295" rotation="0"/>
+    <instance objName="objTownTransition" x="806" y="0" name="inst_D28A7880" locked="0" code="roomTo = rBeachTown;&#xA;location = &quot;Beachside Town&quot;;&#xA;warpX = 33;&#xA;warpY = 500;" scaleX="1" scaleY="16" colour="4294967295" rotation="0"/>
     <instance objName="objBeachBackground" x="0" y="608" name="inst_505812E8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objVinilo" x="352" y="375" name="inst_5024D9CE" locked="0" code="npc = 1;&#xA;speaker[0] = &quot;Kid&quot;;&#xA;message[0] = &quot;Hello sir, glad to see you again!&quot;;&#xA;&#xA;speaker[1] = &quot;Vinilo&quot;;&#xA;message[1] = &quot;Hi there, nice to see you made it through the plains! They're not exactly what i'd call 'easy' to traverse. At any rate, the town is just East of here!&quot;;&#xA;message[2] = &quot;You'll be able to tell if there's a town nearby by the signs posted up on either side.&quot;;&#xA;&#xA;speaker[3] = &quot;Kid&quot;;&#xA;message[3] = &quot;Cool, thanks! See you there i guess.&quot;&#xA;messageEnd = 3;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objCloudCeiling" x="0" y="0" name="inst_439C9DD5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objCloudCeiling" x="800" y="0" name="inst_5F8228A9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objPlayerStart" x="32" y="384" name="inst_1A1B1AE7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objVinilo" x="657" y="503" name="inst_D3077D50" locked="0" code="npc = 1;&#xA;&#xA;speaker[0,0] = &quot;Vinilo&quot;;&#xA;message[0,0] = &quot;Well, here we are! We're on the outskirts of town! You recognize anything so far?&quot;;&#xA;&#xA;speaker[0,1] = &quot;Kid&quot;;&#xA;message[0,1] = &quot;No, sorry... Nothing so far. But I haven't lost hope yet!&quot;;&#xA;message[0,2] = &quot;At any rate, what's this sign for? It seems... oddly out of place I guess.&quot;;&#xA;&#xA;speaker[0,3] = &quot;Vinilo&quot;&#xA;message[0,3] = &quot;Oh, this? There are actually multiple signs posted up all over the place around these parts! They're most frequently used to indicate the fact that there's some sort of a town or landmark nearby, but are also used to give general guidance to passerbys who may happen to come across it.&quot;&#xA;message[0,4] = &quot;That's typically about all they're used for!&quot;&#xA;&#xA;speaker[0,5] = &quot;Kid&quot;;&#xA;message[0,5] = &quot;Very imformative! You'd make a great tour-guide if I'm being honest!&quot;;&#xA;&#xA;speaker[0,6] = &quot;Vinilo&quot;;&#xA;message[0,6] = &quot;Hah! Well that's good to hear I suppose. Anyway, I'll leave you to look around... Maybe you'll see something your recognize or something! If you need me, I'll be in the town!&quot;;&#xA;action[0,6] = true;&#xA;actionObject[0,6] = objR1BeachController2;&#xA;&#xA;speaker[0,7] = &quot;Kid&quot;;&#xA;message[0,7] = &quot;He... seems like a really nice guy quite honestly. I hate to have disturbed him from his fishing trip... Actually, now that I think about it, why didn't he go back to the beach?&quot;;&#xA;message[0,8] = &quot;Eh, beats me I guess. I suppose I'll take a look around while I'm here... Surely I'll recognize something.&quot;&#xA;messageEnd[0] = 8;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objCloudCeiling" x="400" y="0" name="inst_87827947" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objCloudCeiling" x="-400" y="0" name="inst_0B2B366E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bTilesBeach" x="0" y="416" w="32" h="32" xo="32" yo="0" id="10001624" name="inst_C571DBFB" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -198,6 +200,11 @@
     <tile bgName="bTilesBeach" x="128" y="512" w="64" h="64" xo="128" yo="64" id="10001990" name="inst_0020857E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="320" y="448" w="64" h="64" xo="128" yo="64" id="10001991" name="inst_F87E003E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bTilesBeach" x="704" y="544" w="64" h="64" xo="128" yo="64" id="10001992" name="inst_31DF47E4" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bBush" x="-114" y="364" w="214" h="52" xo="0" yo="0" id="10002178" name="inst_752C8BB9" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bPinkFlowers1" x="319" y="320" w="65" h="65" xo="0" yo="0" id="10002183" name="inst_E61D64B6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bWhiteFlowers2" x="484" y="436" w="102" h="45" xo="0" yo="0" id="10002184" name="inst_A824B3D0" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bWhiteFlowers3" x="452" y="449" w="35" h="31" xo="0" yo="0" id="10002185" name="inst_202EEA59" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bWhiteFlowers3" x="250" y="385" w="35" h="31" xo="0" yo="0" id="10002186" name="inst_76DCAB89" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>

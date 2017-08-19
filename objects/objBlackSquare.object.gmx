@@ -3,7 +3,7 @@
   <spriteName>sprBlackSquare</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-999999999</depth>
+  <depth>-999999998</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -45,7 +45,7 @@ timer = 0;
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="1" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -62,75 +62,7 @@ timer = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_xscale = image_scale;
-image_yscale = image_scale;
-
-if zoomIn = true
-{
-    if image_scale &lt;= 50
-    {
-        if scale &lt; 1.5
-        {
-            scale += 0.02;
-        }
-        image_scale += scale;
-        image_angle += 1.9;
-    }
-    if image_scale &gt; 50
-    {
-        image_scale = 50;
-    }
-}
-
-if zoomIn = false
-{
-    if image_scale &gt; 0
-    {
-        if scale &gt; 0
-        {
-            scale -= 0.015;
-        }
-        image_scale -= scale;
-        image_angle -= 2.1;
-    }
-    else
-    {
-        global.transitioning = false;
-        instance_destroy();
-    }
-}
-
-if image_scale &gt;= 50
-{
-    audio_sound_gain(global.currentMusic,0,1000);
-    if alpha &lt; 1 
-    {
-        if timer = 0
-        {
-            alpha += 0.0125;
-        }
-    }
-    else
-    {
-        if timer &lt; 80
-        {
-            timer += 1;
-        }
-    }
-    if timer = 80
-    {
-        alpha -= 0.025;
-    }
-    if alpha &lt;= 0
-    {
-        zoomIn = false;
-        room_goto(objTownTransition.roomTo); //objTownTransition is the purple square the player collides with to create this object.
-        if !instance_exists(objPlayer)
-        {
-            instance_create(objTownTransition.warpX,objTownTransition.warpY,objPlayer);
-        }
-    }    
-}
+            <string>alpha = 1;
 </string>
           </argument>
         </arguments>
@@ -153,17 +85,15 @@ if image_scale &gt;= 50
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>x = view_xview[0] + 400;
+y = view_yview[0] + 304;
+
+draw_self();
 draw_set_alpha(alpha);
 draw_set_font(fntMenu);
 draw_set_color(c_white);
 draw_set_halign(fa_center);
 draw_set_valign(fa_center);
-
-if image_scale &gt;= 50
-{
-    draw_text(view_xview[0] + 400,view_yview[0] + 304,objTownTransition.location);
-}
 </string>
           </argument>
         </arguments>

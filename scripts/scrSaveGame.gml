@@ -45,7 +45,18 @@ if (savePosition)
     {
         global.saveBossItem[i] = global.bossItem[i];
     }
+
+    for (var rm = 0; rm < 250; rm++)
+    {
+        for (var idd = 0; idd < 10; idd++)
+        {
+            global.saveEnemyKilled[rm,idd] = global.enemyKilled[rm,idd]
+        }
+    }
     
+    global.savePlayerLevel = global.playerLevel;
+    global.savePlayerExperience = global.playerExperience;
+       
     global.saveGameClear = global.gameClear;
 }
 
@@ -61,6 +72,8 @@ ds_map_add(saveMap,"saveRoom",global.saveRoom);
 ds_map_add(saveMap,"savePlayerX",global.savePlayerX);
 ds_map_add(saveMap,"savePlayerY",global.savePlayerY);
 ds_map_add(saveMap,"saveGrav",global.saveGrav);
+ds_map_add(saveMap,"savePlayerLevel",global.savePlayerLevel);
+ds_map_add(saveMap,"savePlayerExperience",global.savePlayerExperience);
 
 for (var i = 0; i < global.secretItemTotal; i++)
 {
@@ -70,6 +83,14 @@ for (var i = 0; i < global.secretItemTotal; i++)
 for (var i = 0; i < global.bossItemTotal; i++)
 {
     ds_map_add(saveMap,"saveBossItem["+string(i)+"]",global.saveBossItem[i]);
+}
+
+for (var rm = 0; rm < 250; rm++)
+{
+    for (var idd = 0; idd < 10; idd++)
+    {
+        ds_map_add(saveMap,"saveEnemyKilled[" + string(rm) + "," + string(idd) + "]",global.saveEnemyKilled[rm,idd]);
+    }
 }
 
 ds_map_add(saveMap,"saveGameClear",global.saveGameClear);

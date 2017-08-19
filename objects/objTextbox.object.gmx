@@ -3,7 +3,7 @@
   <spriteName>sprTriggerMask</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-999999</depth>
+  <depth>-9999999</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,7 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>///setting variables and stuff
-image_alpha = 1;
+image_alpha = 0;
+sprite = sprKidPortrait;
+speakerObject = objPlayer;
 type = 0;
 messageCurrent = 0;
 questionCurrent = 0;
@@ -62,11 +64,12 @@ fontSize = font_get_size(fntDialogue);
 
 messageDraw = "";
 
-increase = 0.5;
+increase = 0.8;
 characters = 0;
 hold = false;
 maxLength = 750;
 response = 0;
+pressed = false;
 
 interact = false;
 characterReset = false;
@@ -113,19 +116,38 @@ yy = 0;
           <argument>
             <kind>1</kind>
             <string>///textbox code
-if instance_exists(objPlayer)
+if interact = false
 {
-    if npc = 0
+    if instance_exists(objPlayer) 
     {
-        if place_meeting(x,y,objPlayer)
+        if npc = 0
         {
-            scrTouchDialogue();
+            if place_meeting(x,y,objPlayer)
+            {
+                scrTouchDialogue();
+            }
+        }
+        if npc = 1
+        {
+            if pressed = true
+            {
+                scrTouchDialogue();
+            }
         }
     }
     if npc = 2
     {
         scrTouchDialogue();
     }
+}
+
+if speaker[type,speakerCurrent] != ""
+{
+    maxLength = 635
+}
+else
+{
+    maxLength = 750
 }
 
 
@@ -237,79 +259,6 @@ if wait &gt;= waitMax
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(objPlayer)
-{
-    if place_meeting(x,y,objPlayer)
-    {
-        if interact = false and npc = 0
-        {
-            draw_set_alpha(0.5);
-            draw_roundrect_colour(view_xview[0] + 20,view_yview[0] + 20,view_xview[0] + textboxWidth,view_yview[0] + textboxHeight, c_black,c_black,false);
-            draw_set_alpha(1);
-            draw_set_colour(c_white);
-            draw_set_font(font);
-            draw_set_halign(fa_left);
-            draw_set_valign(fa_top);
-            draw_set_color(c_white);
-    
-            draw_text_ext
-            (
-                view_xview[0] + 25,
-                view_yview[0] + 25,
-                messageDraw,
-                fontSize+(fontSize/2),
-                maxLength - 5
-            );
-        }
-    }
-}
-if interact = false and npc = 2
-{
-    draw_set_alpha(0.5);
-    draw_roundrect_colour(view_xview[0] + 20,view_yview[0] + 20,view_xview[0] + textboxWidth,view_yview[0] + textboxHeight, c_black,c_black,false);
-    draw_set_alpha(1);
-    draw_set_colour(c_white);
-    
-    draw_set_font(font);
-    draw_set_halign(fa_left);
-    draw_set_valign(fa_top);
-    draw_set_color(c_white);
-    
-    draw_text_ext
-    (
-        view_xview[0] + 25,
-        view_yview[0] + 25,
-        messageDraw,
-        fontSize+(fontSize/2),
-        maxLength - 5
-    );
-}
-else
-{
-    //do nothing
-}
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///options menu
 if interact = false
 {
@@ -376,6 +325,123 @@ if interact = false
         }
     }   
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///rectangle and text
+if interact = false
+{
+    if (npc = 0 and instance_exists(objPlayer) and place_meeting(x,y,objPlayer)) or (npc = 2) or (pressed = true)
+    {
+        draw_set_alpha(0.75);
+        draw_roundrect_colour(view_xview[0] + 20,view_yview[0] + 20,view_xview[0] + textboxWidth,view_yview[0] + textboxHeight, c_black,c_black,false);
+        draw_set_alpha(1);
+        draw_set_colour(c_white);
+        draw_set_font(font);
+        draw_set_halign(fa_left);
+        draw_set_valign(fa_top);
+        draw_set_color(c_white);
+
+        draw_text_ext
+        (
+            view_xview[0] + 25,
+            view_yview[0] + 25,
+            messageDraw,
+            fontSize+(fontSize/2),
+            maxLength - 5
+        );
+    }
+    if npc = 1 and keyboard_check_pressed(vk_up) and place_meeting(x,y,objPlayer) and instance_exists(objPlayer)
+    {
+        pressed = true;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///views and portraits
+draw_self()
+
+if interact = false
+{
+    if instance_exists(objPlayer) and place_meeting(x,y,objPlayer) and npc = 0
+    {
+    scrDialoguePortraits();
+    }
+    else if npc = 2
+    {
+    scrDialoguePortraits();
+    }
+    else if npc = 1 and pressed = true
+    {
+    scrDialoguePortraits();
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///debug stuff
+
+//scrDrawTextOutline(32,300,string(view_visible[1]),c_black,c_white);
+//scrDrawTextOutline(32,332,string(speaker[type,speakerCurrent]),c_black,c_white);
+//scrDrawTextOutline(32,400,"Interact: " + string(interact),c_black,c_white);
+//scrDrawTextOutline(32,432,"xx + yy: " + string(xx) + " " + string(yy),c_black,c_white);
+//scrDrawTextOutline(32,464,"speaker: " + string(speaker[type,speakerCurrent]),c_black,c_white);
+//scrDrawTextOutline(32,496,"type: " + string(type),c_black,c_white);
+//scrDrawTextOutline(32,528,"message length: " + string(string_length(message[type,messageCurrent])),c_black,c_white);
 </string>
           </argument>
         </arguments>
