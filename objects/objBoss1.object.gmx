@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>if !audio_is_playing(musBoss1) {audio_play_sound(musBoss1,15,false);}
-
+audio_sound_gain(global.currentMusic,0,500);
 image_alpha = 0;
 image_speed = 1/5;
 
@@ -67,6 +67,17 @@ attackPrevious = INTRO;
 attackTimer = 0;
 attackTimerMax = 0;
 
+debugTimer = 0;
+
+//boss variables
+hp = 250
+hpMax = 250;
+
+///spawn hp bar
+if !instance_exists(objHP)
+{
+    instance_create(50,541,objHP);
+}
 </string>
           </argument>
         </arguments>
@@ -133,7 +144,7 @@ if instance_exists(objPlayer)
                         }break;
                         case ATTACK4:
                         {
-                            state = ATTACK4;
+                            state = ATTACK1;
                         }break;
                     }
                     jumpCounter = 0;
@@ -181,6 +192,7 @@ if instance_exists(objPlayer)
                 attackPrevious = ATTACK3;
                 attack3IntroDone = false;
             }
+            break;
             case ATTACK4:
             {
                 state = MOVING;
@@ -371,7 +383,7 @@ if instance_exists(objPlayer)
                     }
                     if instance_exists(objBoss1Attack3Warning)
                     {
-                        fadeOut = true;
+                        objBoss1Attack3Warning.fadeOut = true;
                     }
                     instance_create(64,524,objBoss1Attack3Summon);
                     instance_create(736,524,objBoss1Attack3Summon);
@@ -386,6 +398,7 @@ if instance_exists(objPlayer)
         break;
         case ATTACK4:
         {
+            attackTimer += 1;
             if attackTimer = 1
             {
                 if !instance_exists(objBoss1Attack4Circle)
@@ -393,7 +406,6 @@ if instance_exists(objPlayer)
                     instance_create(400,150,objBoss1Attack4Circle);
                 }
             }
-            attackTimer += 1;
             if attackTimer mod 30 = 0 and attackTimer &lt;= 150
             {
                 scrMakeStar(400,150,10,5,5,4,attack4Angle,4,false,objBoss1Attack4);
@@ -403,7 +415,7 @@ if instance_exists(objPlayer)
             }
             if attackTimer = 300
             {
-            objBoss1Attack4.retract = true;
+                objBoss1Attack4.retract = true;
             }
             if attackTimer = 650
             {
@@ -563,6 +575,72 @@ if sprite_index != sprBoss1Jump and jumpWindUp != 1
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="objBullet">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///lower hp
+if hp &gt; 0
+{
+    hp -= global.damage;   
+    audio_play_sound(sndSlimeHit,10,0); 
+}
+with objBullet
+{
+    if place_meeting(x,y,objBoss1)
+    {
+        instance_destroy();
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///health bar stuff
+with objHP
+{
+    enemy = objBoss1;
+    if instance_exists(other)
+    {
+        object = other;
+        hp = other.hp;
+        hpMax = other.hpMax;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
@@ -667,14 +745,16 @@ if state = ATTACK2
           <argument>
             <kind>1</kind>
             <string>draw_self();
-
+/*
 scrDrawTextOutline(32,32,"attackTimer: " + string(attackTimer),c_white,c_black);
 scrDrawTextOutline(32,64,"State Key: 1 = INTRO | 2 = MOVING | 3 = ATTACK1 | 4 = ATTACK2 | 5 = ATTACK3 | 6 = ATTACK4",c_white,c_black);
 scrDrawTextOutline(32,80,"state: " + string(state),c_white,c_black);
 scrDrawTextOutline(32,96,"hasjumped: " + string(hasJumped),c_white,c_black);
 scrDrawTextOutline(32,112,"attackPrevious: " + string(attackPrevious),c_white,c_black);
+*/
+scrDrawTextOutline(32,112,"debugTimer: " + string(debugTimer),c_white,c_black);
 
-show_debug_message(string(instance_exists(objBoss1Attack2Intro1)));
+debugTimer += 1;
 
 </string>
           </argument>
