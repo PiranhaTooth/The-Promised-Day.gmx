@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>objPlayerKiller</parentName>
+  <parentName>self</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,8 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if !audio_is_playing(musBoss1) {audio_play_sound(musBoss1,15,false);}
-audio_sound_gain(global.currentMusic,0,500);
+            <string>counter = 0;
+
+instance_create(x,y,objBoss1Hitbox);
+if !audio_is_playing(musBoss1) {scrPlayMusic(musBoss1,false);}
+
 image_alpha = 0;
 image_speed = 1/5;
 
@@ -34,9 +37,12 @@ hasJumped = false;
 jumpWindUp = 0;
 attackComplete = false;
 jumpCounter = 0;
+shield = false;
+shieldTime = true;
 
 //attack1
 attack1WindUp = 0;
+attack1Shook = false;
 
 //attack2
 attack2IntroDone = false;
@@ -53,12 +59,20 @@ attack3IntroDone = false;
 //attack4
 attack4Angle = 0
 
+//fillerAttack
+timer = 0;
+targetX = 0;
+targetY = 0;
+fillerAttackCount = 0;
+
 INTRO = 1;
 MOVING = 2;
 ATTACK1 = 3;
 ATTACK2 = 4;
 ATTACK3 = 5;
 ATTACK4 = 6;
+FILLERATTACK = 7;
+DEAD = 8;
 
 state = INTRO;
 statePrevious = INTRO;
@@ -70,7 +84,7 @@ attackTimerMax = 0;
 debugTimer = 0;
 
 //boss variables
-hp = 250
+hp = 70
 hpMax = 250;
 
 ///spawn hp bar
@@ -101,7 +115,10 @@ if !instance_exists(objHP)
           <argument>
             <kind>1</kind>
             <string>///attacks and states
-
+if instance_exists(objPlayer)
+{
+    timer += 1;
+}
 //Attack finished
 if instance_exists(objPlayer)
 {
@@ -165,6 +182,7 @@ if instance_exists(objPlayer)
                 attackComplete = false;
                 statePrevious = ATTACK1;
                 attackPrevious = ATTACK1;
+                atttack1Shook = false;
             }
             break;
             case ATTACK2:
@@ -206,6 +224,17 @@ if instance_exists(objPlayer)
     }
 
     //Attack started
+    /*
+    if timer = 3801
+    {
+        state = ATTACK4;
+        attackTimer = 0;
+    }*/
+    if timer = 4400
+    {
+        state = FILLERATTACK;
+    }
+    
     switch state
     {
         case INTRO:
@@ -250,6 +279,7 @@ if instance_exists(objPlayer)
         {
             if attack1WindUp = 0
             {
+                if !audio_is_playing(sndBoss1Attack1Windup) {audio_play_sound(sndBoss1Attack1Windup,10,false);}
                 if image_yscale &gt; 0.65 
                 {
                     image_yscale = lerp(image_yscale,0.65,0.05);                    
@@ -271,6 +301,7 @@ if instance_exists(objPlayer)
             }
             if attack1WindUp = 1
             {
+                if attack1Shook = false {scrScreenShake(10,7); attack1Shook = true;}
                 if objPlayer.x &lt; x {image_xscale = image_yscale;} else {image_xscale = -image_yscale;}
                 image_yscale = lerp(image_yscale,1.2,0.2);
                 if objPlayer.x &lt; x 
@@ -311,7 +342,7 @@ if instance_exists(objPlayer)
                 attackTimer ++;
                 if attackTimer = 1
                 {
-                    scrScreenShake(14,4);
+                    scrScreenShake(14,10);
                 }
                 if attackTimer &gt;= 15
                 {
@@ -335,6 +366,7 @@ if instance_exists(objPlayer)
                 {
                     instance_create(irandom_range(75,125),100,objBoss1Attack2);
                     attack2Dir1 += 14.4;
+                    audio_play_sound(sndBoss1Attack2,10,false);
                 }
                 
                 if (attack2Timer1 mod 100) = 0
@@ -376,6 +408,8 @@ if instance_exists(objPlayer)
             {
                 if attack3IntroDone = false
                 {
+                    instance_create(64,516,objBoss1Attack3Summon);
+                    instance_create(736,516,objBoss1Attack3Summon);
                     for(var i = 0; i &lt; 5; i++)
                     {
                         instance_create(64,368 + (attack3SpawnGap * i),objBoss1Attack3Left);
@@ -385,10 +419,12 @@ if instance_exists(objPlayer)
                     {
                         objBoss1Attack3Warning.fadeOut = true;
                     }
-                    instance_create(64,524,objBoss1Attack3Summon);
-                    instance_create(736,524,objBoss1Attack3Summon);
                     attack3IntroDone = true;
                 }
+            }
+            if attackTimer = 135
+            {
+                audio_play_sound(sndBoss1Attack3Summon,10,false);
             }
             if attackTimer &gt;= 470
             {
@@ -406,18 +442,18 @@ if instance_exists(objPlayer)
                     instance_create(400,150,objBoss1Attack4Circle);
                 }
             }
-            if attackTimer mod 30 = 0 and attackTimer &lt;= 150
+            if attackTimer mod 35 = 0 and attackTimer &lt;= 300
             {
                 scrMakeStar(400,150,10,5,5,4,attack4Angle,4,false,objBoss1Attack4);
                 attack4Angle = random(360);
-                scrScreenShake(10,2);
+                scrScreenShake(15,6);
                 instance_create(400,150,objBoss1Attack4CircleEffect)
             }
-            if attackTimer = 300
+            if attackTimer = 450
             {
                 objBoss1Attack4.retract = true;
             }
-            if attackTimer = 650
+            /*if attackTimer = 800
             {
                 if instance_exists(objBoss1Attack4Retract)
                 {
@@ -433,7 +469,7 @@ if instance_exists(objPlayer)
                 }
                 repeat(64)
                 {
-                    scrScreenShake(15,5);
+                    scrScreenShake(20,5);
                     instance_create(400,150,objBoss1Attack4_2);
                 }
             }       
@@ -442,11 +478,109 @@ if instance_exists(objPlayer)
                 attackComplete = true;
                 attack4Angle = 0;
                 attackTimer = 0;
+            }*/
+        }
+        break;
+        case FILLERATTACK:
+        {
+            if timer = 4600
+            {
+                if !instance_exists(objBoss1Disappear)
+                {
+                    instance_create(x-16,y,objBoss1Disappear);
+                }
+            }           
+            switch timer
+            {
+                case 4678:
+                case 4689:
+                case 4712:
+                case 4722:
+                case 4748:
+                case 4759:
+                case 4783:
+                case 4794:
+                case 4815:
+                case 4826:
+                case 4850:
+                case 4861:
+                case 4884:
+                case 4895:
+                case 4930:
+                case 4953:
+                case 4964:
+                case 4986:
+                case 4997:
+                case 5021:
+                case 5032:
+                case 5055:
+                case 5066:
+                case 5090:
+                case 5100:
+                case 5125:
+                case 5136:
+                case 5158:
+                case 5170:
+                case 5193:
+                case 5204:
+                {
+                    scrScreenShake(20,6);
+                    fillerAttackCount += 1;   
+                    if fillerAttackCount = 1 {instance_create(400,150,objBoss1Attack4CircleEffect)} else if fillerAttackCount &gt;= 2 {fillerAttackCount = 0;}
+                    for(var i = 0; i &lt; 3; i++)
+                    {
+                        projectile = instance_create(400,150,objBoss1FillerAttack);
+                        projectile.image_angle = direction;
+                        projectile.vspeed = random_range(-4,-7);
+                        projectile.targetX = objPlayer.x - 32 + ( i * irandom_range(-96,122));
+                        projectile.targetY = 512;
+                        t = (-projectile.vspeed + sqrt(sqr(projectile.vspeed) + 2 * .3 * (560 - projectile.y)))/.3
+                        projectile.hspeed = (projectile.targetX - projectile.x) / t
+                        projectile.gravity = 0.25;
+                    }             
+                break;
+                }
+            }
+            if timer = 5315 and instance_exists(objBoss1Attack4Retract)
+            {
+                objBoss1Attack4Retract.burst = true;
+            }
+            if timer = 5325
+            {
+                if objPlayer.x &lt; 400
+                {
+                    instance_create(600,512,objBoss1Reappear);
+                }
+                else
+                {
+                    instance_create(200,512,objBoss1Reappear);
+                }
+            }
+            if timer = 5353
+            {
+                objBoss1Attack4Retract.fadeout = true;
+                instance_create(x,y,objBoss1Attack4CircleEffect);
+                if instance_exists(objBoss1Attack4Circle)
+                {
+                    objBoss1Attack4Circle.fadeout = true;
+                }
+                repeat(64)
+                {
+                    scrScreenShake(20,15);
+                    instance_create(400,150,objBoss1Attack4_2);
+                }
+                shieldTime = false;
+                attackComplete = true;
+                state = MOVING;
+                statePrevious = ATTACK4;
+                attackPrevious = ATTACK4;
+                timer = 0;
             }
         }
         break;
     }
 }
+           
 </string>
           </argument>
         </arguments>
@@ -481,6 +615,36 @@ if hspeed &lt; 0
 if sprite_index != sprBoss1Jump and jumpWindUp != 1 
 {
     image_speed = 1/5;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///hp and shield control
+
+if hp &lt;= 62 and shieldTime = true
+{
+    shield = true;
+}
+else if shieldTime = false
+{
+    shield = false;
 }
 </string>
           </argument>
@@ -570,72 +734,6 @@ if sprite_index != sprBoss1Jump and jumpWindUp != 1
 
 
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="objBullet">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///lower hp
-if hp &gt; 0
-{
-    hp -= global.damage;   
-    audio_play_sound(sndSlimeHit,10,0); 
-}
-with objBullet
-{
-    if place_meeting(x,y,objBoss1)
-    {
-        instance_destroy();
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///health bar stuff
-with objHP
-{
-    enemy = objBoss1;
-    if instance_exists(other)
-    {
-        object = other;
-        hp = other.hp;
-        hpMax = other.hpMax;
-    }
-}
 </string>
           </argument>
         </arguments>
@@ -745,17 +843,22 @@ if state = ATTACK2
           <argument>
             <kind>1</kind>
             <string>draw_self();
-/*
-scrDrawTextOutline(32,32,"attackTimer: " + string(attackTimer),c_white,c_black);
-scrDrawTextOutline(32,64,"State Key: 1 = INTRO | 2 = MOVING | 3 = ATTACK1 | 4 = ATTACK2 | 5 = ATTACK3 | 6 = ATTACK4",c_white,c_black);
-scrDrawTextOutline(32,80,"state: " + string(state),c_white,c_black);
-scrDrawTextOutline(32,96,"hasjumped: " + string(hasJumped),c_white,c_black);
-scrDrawTextOutline(32,112,"attackPrevious: " + string(attackPrevious),c_white,c_black);
-*/
-scrDrawTextOutline(32,112,"debugTimer: " + string(debugTimer),c_white,c_black);
 
-debugTimer += 1;
+//scrDrawTextOutline(32,32,"attackTimer: " + string(attackTimer),c_white,c_black);
+//scrDrawTextOutline(32,64,"State Key: 1 = INTRO | 2 = MOVING | 3 = ATTACK1 | 4 = ATTACK2 | 5 = ATTACK3 | 6 = ATTACK4",c_white,c_black);
+//scrDrawTextOutline(32,80,"state: " + string(state),c_white,c_black);
+//scrDrawTextOutline(32,96,"hasjumped: " + string(hasJumped),c_white,c_black);
+//scrDrawTextOutline(32,112,"attackPrevious: " + string(attackPrevious),c_white,c_black);
+//scrDrawTextOutline(32,128,"timer: " + string(timer),c_white,c_black);
+scrDrawTextOutline(32,96,"hp: " + string(hp),c_white,c_black);
+scrDrawTextOutline(32,112,"shieldTime: " + string(shieldTime),c_white,c_black);
+scrDrawTextOutline(32,128,"shield: " + string(shield),c_white,c_black);
 
+if keyboard_check_pressed(vk_enter)
+{
+    counter += 1;
+    show_debug_message(string(timer) + "   " + string(counter));    
+}
 </string>
           </argument>
         </arguments>

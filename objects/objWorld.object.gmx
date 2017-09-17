@@ -269,6 +269,7 @@ if (global.gameStarted)
             <kind>1</kind>
             <string>///debug keys
 
+
 if keyboard_check_pressed(vk_enter) and !instance_exists(objBoss1Spawn) and room = rBossGrasslands
 {
     instance_create(400,400,objBoss1Spawn);

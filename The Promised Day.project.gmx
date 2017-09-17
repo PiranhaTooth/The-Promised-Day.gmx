@@ -25,6 +25,9 @@
         <sound>sound\sndBoss1Summon</sound>
         <sound>sound\sndBoss1Rumble</sound>
         <sound>sound\sndBoss1Spawn</sound>
+        <sound>sound\sndBoss1Attack1Windup</sound>
+        <sound>sound\sndBoss1Attack2</sound>
+        <sound>sound\sndBoss1Attack3Summon</sound>
       </sounds>
     </sounds>
     <sounds name="music">
@@ -175,6 +178,7 @@
       <sprite>sprites\sprBeachBackground</sprite>
       <sprite>sprites\sprCloudCeiling</sprite>
       <sprite>sprites\sprSun</sprite>
+      <sprite>sprites\sprGrasslandsBG</sprite>
     </sprites>
     <sprites name="npcs">
       <sprites name="Vinilo">
@@ -212,8 +216,11 @@
     <sprites name="Boss1">
       <sprite>sprites\sprSlimeStatue</sprite>
       <sprite>sprites\sprBoss1</sprite>
+      <sprite>sprites\sprBoss1Hitbox</sprite>
       <sprite>sprites\sprBoss1Jump</sprite>
+      <sprite>sprites\sprBoss1JumpHitbox</sprite>
       <sprite>sprites\sprBoss1Attack1Indicator</sprite>
+      <sprite>sprites\sprBoss1Bullet</sprite>
       <sprites name="Attack Spawns / Summons">
         <sprite>sprites\sprBoss1Spawn</sprite>
         <sprite>sprites\sprBoss1Attack2Intro1</sprite>
@@ -223,15 +230,19 @@
         <sprite>sprites\sprBoss1Attack3Summon</sprite>
         <sprite>sprites\sprBoss1WarningTriangle</sprite>
         <sprite>sprites\sprBoss1Attack4Circle</sprite>
+        <sprite>sprites\sprBoss1Disappear</sprite>
       </sprites>
     </sprites>
+    <sprite>sprites\sprBossShield</sprite>
     <sprite>sprites\sprTest</sprite>
     <sprite>sprites\sprite125</sprite>
-    <sprite>sprites\sprBoss1Bullet</sprite>
     <sprite>sprites\sprite129</sprite>
     <sprite>sprites\bullet_sprite_sheet</sprite>
   </sprites>
   <backgrounds name="background">
+    <background>background\bgGrasslands</background>
+    <background>background\bgGrasslandsTileset</background>
+    <background>background\bgGrasslandsDark</background>
     <background>background\bAllTiles</background>
     <background>background\bMegaman</background>
     <background>background\bJumpThrough</background>
@@ -301,6 +312,7 @@
       <script>scripts\scrDrawTextOutline.gml</script>
       <script>scripts\scrScreenShake.gml</script>
       <script>scripts\scrWave.gml</script>
+      <script>scripts\scrArcProjectile.gml</script>
     </scripts>
     <scripts name="rain">
       <script>scripts\rain_set_drop_count.gml</script>
@@ -486,6 +498,7 @@
     </objects>
     <objects name="backgrounds">
       <object>objects\objBackgroundSun</object>
+      <object>objects\objChangeableBG</object>
       <object>objects\objBeachBackground</object>
       <object>objects\objCloudCeiling</object>
     </objects>
@@ -516,7 +529,7 @@
       <object>objects\objBoss1Intro</object>
       <object>objects\objBoss1Spawn</object>
       <object>objects\objBoss1</object>
-      <object>objects\objBoss1Old</object>
+      <object>objects\objBoss1Hitbox</object>
       <objects name="Boss1 Attacks">
         <object>objects\objBoss1Attack1IndicatorEffect</object>
         <object>objects\objBoss1Attack1Indicator</object>
@@ -540,8 +553,13 @@
         <object>objects\objBoss1Attack4Retract</object>
         <object>objects\objBoss1Attack4Circle</object>
         <object>objects\objBoss1Attack4CircleEffect</object>
+        <object>objects\objBoss1Disappear</object>
+        <object>objects\objBoss1FillerAttack</object>
+        <object>objects\objBoss1Reappear</object>
       </objects>
     </objects>
+    <object>objects\objBossShield</object>
+    <object>objects\objBoss1Debug</object>
     <object>objects\objTest</object>
   </objects>
   <rooms name="rooms">
