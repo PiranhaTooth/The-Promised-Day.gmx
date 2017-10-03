@@ -29,6 +29,7 @@
 image_yscale = image_xscale;
 speed = random_range(3,6);
 direction = irandom_range(20,160)
+soundDone = false
 timer = 0;
 </string>
           </argument>
@@ -54,9 +55,13 @@ timer = 0;
             <kind>1</kind>
             <string>timer += 1;
 
+if timer = 80
+{
+    audio_play_sound(sndBoss1Attack2Windup2,10,false);
+}
 if timer &gt; 30 and speed &gt; 0 and timer &lt; 60
 {
-    speed = lerp(speed,0,0.1);   
+    speed = lerp(speed,0,0.1);       
 }
 if timer &gt; 80
 {

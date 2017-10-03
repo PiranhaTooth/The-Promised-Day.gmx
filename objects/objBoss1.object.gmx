@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>self</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -43,14 +43,15 @@ shieldTime = true;
 //attack1
 attack1WindUp = 0;
 attack1Shook = false;
+attack1Sound = 2;
 
 //attack2
 attack2IntroDone = false;
 attack2Timer1 = 0;
 attack2Timer2 = 0;
 attack2JumpTimer = 0
-attack2Dir1 = 180;
-attack2Dir2 = 0;
+attack2Dir1 = 90;
+attack2Dir2 = 270;
 
 //attack3
 attack3SpawnGap = 32;
@@ -182,7 +183,8 @@ if instance_exists(objPlayer)
                 attackComplete = false;
                 statePrevious = ATTACK1;
                 attackPrevious = ATTACK1;
-                atttack1Shook = false;
+                attack1Shook = false;
+                attack1Sound = 2;
             }
             break;
             case ATTACK2:
@@ -320,9 +322,18 @@ if instance_exists(objPlayer)
                     if !instance_exists(objBoss1Attack1Indicator) {instance_create(x,64,objBoss1Attack1Indicator);}
                     if instance_exists(objBoss1Attack1Indicator) {objBoss1.x = objBoss1Attack1Indicator.x;}
                     if attackTimer &lt; 256 {attackTimer += 1;}
+                    if attackTimer mod 25 = 0
+                    {
+                        if attack1Sound mod 2 == 0
+                        {
+                            audio_play_sound(sndBoss1Attack1,10,0);
+                        }
+                        attack1Sound ++;
+                    }
                     if attackTimer mod 50 = 0
                     {
                         repeat(6) {instance_create(objBoss1Attack1Indicator.x,objBoss1Attack1Indicator.y - 128,objBoss1Attack1_2);}
+                        scrScreenShake(15,12);
                     }
                     if attackTimer = 225
                     {
@@ -353,9 +364,10 @@ if instance_exists(objPlayer)
         break;
         case ATTACK2:
         {
-            if attack2IntroDone = false
+            if attack2IntroDone = false and !instance_exists(objBoss1Attack2Intro1) 
             {
-                if !instance_exists(objBoss1Attack2Intro1) {instance_create(x-(20 * image_xscale),y-42,objBoss1Attack2Intro1);}
+                instance_create(x-(20 * image_xscale),y-42,objBoss1Attack2Intro1);
+                audio_play_sound(sndBoss1Attack2Windup,10,false);
             }
             if attack2IntroDone = true
             {
@@ -365,20 +377,14 @@ if instance_exists(objPlayer)
                 if (attack2Timer1 mod 10) = 0
                 {
                     instance_create(irandom_range(75,125),100,objBoss1Attack2);
-                    attack2Dir1 += 14.4;
+                    attack2Dir1 += 18.8;
                     audio_play_sound(sndBoss1Attack2,10,false);
                 }
-                
-                if (attack2Timer1 mod 100) = 0
-                {
-                    instance_create(400,100,objBoss1Attack2_3);
-                }
-                
                 attack2Timer2 += 1;
                 if (attack2Timer2 mod 10) = 0
                 {
                     instance_create(irandom_range(675,725),100,objBoss1Attack2_2);
-                    attack2Dir2 -= 14.4;
+                    attack2Dir2 -= 18.8;
                 }
                 if place_meeting(x,y + 4, objBlock) and attackTimer &gt; 50 and attackTimer &lt; 550
                 {
@@ -718,6 +724,10 @@ else if shieldTime = false
                 }
             }
         }
+        if !place_meeting(xprevious,yprevious,objBlock)
+        {
+            audio_play_sound(sndBoss1Land,10,false);
+        }
     }
     if !place_free(x + hspeed,y)
     { 
@@ -775,6 +785,7 @@ if state = MOVING
     hspeed = (-vspeed / 2) * -image_xscale;
     gravity = 0.25;
     sprite_index = sprBoss1Jump;
+    audio_play_sound(sndBoss1Jump,10,false);
     if image_index != 5
     {
         image_speed = (gravity / -vspeed) * 2.75;
@@ -850,9 +861,7 @@ if state = ATTACK2
 //scrDrawTextOutline(32,96,"hasjumped: " + string(hasJumped),c_white,c_black);
 //scrDrawTextOutline(32,112,"attackPrevious: " + string(attackPrevious),c_white,c_black);
 //scrDrawTextOutline(32,128,"timer: " + string(timer),c_white,c_black);
-scrDrawTextOutline(32,96,"hp: " + string(hp),c_white,c_black);
-scrDrawTextOutline(32,112,"shieldTime: " + string(shieldTime),c_white,c_black);
-scrDrawTextOutline(32,128,"shield: " + string(shield),c_white,c_black);
+scrDrawTextOutline(32,128,"attack1Sound: " + string(attack1Sound),c_white,c_black);
 
 if keyboard_check_pressed(vk_enter)
 {

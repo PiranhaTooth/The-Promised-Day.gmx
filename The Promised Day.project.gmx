@@ -22,10 +22,15 @@
       <sound>sound\sndDialogue</sound>
       <sound>sound\sndLevelUp</sound>
       <sounds name="Boss1">
+        <sound>sound\sndBoss1Attack1</sound>
+        <sound>sound\sndBoss1Land</sound>
+        <sound>sound\sndBoss1Jump</sound>
         <sound>sound\sndBoss1Summon</sound>
         <sound>sound\sndBoss1Rumble</sound>
         <sound>sound\sndBoss1Spawn</sound>
         <sound>sound\sndBoss1Attack1Windup</sound>
+        <sound>sound\sndBoss1Attack2Windup</sound>
+        <sound>sound\sndBoss1Attack2Windup2</sound>
         <sound>sound\sndBoss1Attack2</sound>
         <sound>sound\sndBoss1Attack3Summon</sound>
       </sounds>
@@ -238,6 +243,7 @@
     <sprite>sprites\sprite125</sprite>
     <sprite>sprites\sprite129</sprite>
     <sprite>sprites\bullet_sprite_sheet</sprite>
+    <sprite>sprites\nike</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bgGrasslands</background>
@@ -312,7 +318,6 @@
       <script>scripts\scrDrawTextOutline.gml</script>
       <script>scripts\scrScreenShake.gml</script>
       <script>scripts\scrWave.gml</script>
-      <script>scripts\scrArcProjectile.gml</script>
     </scripts>
     <scripts name="rain">
       <script>scripts\rain_set_drop_count.gml</script>
@@ -542,7 +547,6 @@
         <object>objects\objBoss1Attack2Summon</object>
         <object>objects\objBoss1Attack2</object>
         <object>objects\objBoss1Attack2_2</object>
-        <object>objects\objBoss1Attack2_3</object>
         <object>objects\objBoss1Attack3Summon</object>
         <object>objects\objBoss1Attack3Warning</object>
         <object>objects\objBoss1Attack3Left</object>
@@ -558,7 +562,7 @@
         <object>objects\objBoss1Reappear</object>
       </objects>
     </objects>
-    <object>objects\objBossShield</object>
+    <object>objects\mes</object>
     <object>objects\objBoss1Debug</object>
     <object>objects\objTest</object>
   </objects>
