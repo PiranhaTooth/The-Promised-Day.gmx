@@ -48,24 +48,30 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = objBoss1.x;
-y = objBoss1.y;
-hspeed = objBoss1.hspeed;
-vspeed = objBoss1.vspeed;
-
-if objBoss1.sprite_index = sprBoss1
+            <string>if instance_exists(objBoss1)
 {
-    sprite_index = sprBoss1Hitbox;
+    x = objBoss1.x;
+    y = objBoss1.y;
+    hspeed = objBoss1.hspeed;
+    vspeed = objBoss1.vspeed;
+    
+    if objBoss1.sprite_index = sprBoss1
+    {
+        sprite_index = sprBoss1Hitbox;
+    }
+    if objBoss1.sprite_index = sprBoss1Jump
+    {
+        sprite_index = sprBoss1JumpHitbox;
+    }
+    
+    image_index = objBoss1.image_index;
+    image_xscale = objBoss1.image_xscale;
+    image_yscale = objBoss1.image_yscale;
 }
-if objBoss1.sprite_index = sprBoss1Jump
+else
 {
-    sprite_index = sprBoss1JumpHitbox;
+    instance_destroy();
 }
-
-image_index = objBoss1.image_index;
-image_xscale = objBoss1.image_xscale;
-image_yscale = objBoss1.image_yscale;
-
 </string>
           </argument>
         </arguments>
@@ -89,27 +95,30 @@ image_yscale = objBoss1.image_yscale;
           <argument>
             <kind>1</kind>
             <string>///lower hp
-if objBoss1.shield = false
+if instance_exists(objBoss1)
 {
-    if objBoss1.hp &gt; 0
+    if objBoss1.shield = false
     {
-        objBoss1.hp -= global.damage;   
-        audio_play_sound(sndSlimeHit,10,0); 
+        if objBoss1.hp &gt; 0
+        {
+            objBoss1.hp -= global.damage;   
+            audio_play_sound(sndSlimeHit,10,0); 
+        }
+        else
+        {
+            objBoss1.state = objBoss1.DEAD;
+        }
     }
-    else
+    else if !instance_exists(objBossShield)
     {
-        objBoss1.state = DEAD;
+        instance_create(objBoss1.x,objBoss1.y,objBossShield);
     }
-}
-else if !instance_exists(objBossShield)
-{
-    instance_create(objBoss1.x,objBoss1.y,objBossShield);
-}
-with objBullet
-{
-    if place_meeting(x,y,objBoss1)
+    with objBullet
     {
-        instance_destroy();
+        if place_meeting(x,y,objBoss1)
+        {
+            instance_destroy();
+        }
     }
 }
 </string>
@@ -133,14 +142,17 @@ with objBullet
           <argument>
             <kind>1</kind>
             <string>///health bar stuff
-with objHP
+if instance_exists(objBoss1)
 {
-    enemy = objBoss1;
-    if instance_exists(enemy)
+    with objHP
     {
-        object = enemy;
-        hp = enemy.hp;
-        hpMax = enemy.hpMax;
+        enemy = objBoss1;
+        if instance_exists(enemy)
+        {
+            object = enemy;
+            hp = enemy.hp;
+            hpMax = enemy.hpMax;
+        }
     }
 }
 </string>

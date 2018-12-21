@@ -29,9 +29,45 @@
 hpMax = hp;
 hpXscale = 1;
 hpX = 50;
-hpY = 541;
+if instance_exists(objPlayer) and objPlayer.y &gt;= 560
+{
+    hpY = 12;
+}
+else
+{
+    hpY = 541;
+}
 
-enemy = objSlimeEnemy;
+switch room
+{
+    case r1Grasslands:
+    case r2Grasslands:
+    case r3Grasslands:
+    case r4Grasslands:
+    case r5Grasslands:
+    case r6Grasslands:
+    case r7Grasslands:
+    case r8Grasslands:
+    case r9Grasslands:
+    case r10Grasslands:
+    case r11Grasslands:
+    case r12Grasslands:
+    case rGrassDesertTransition:
+    case rGrassDesertTransition2:
+    {
+        enemy = objSlimeEnemy;
+    }
+    break;
+    case rBossGrasslands:
+    {
+        enemy = objBoss1;
+    }
+    break;
+    case rWastelandsBoss:
+    {
+        enemy = objBoss2;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -55,7 +91,14 @@ enemy = objSlimeEnemy;
           <argument>
             <kind>1</kind>
             <string>hpX = clamp(hpX,50 - 3,50 + 3);
-hpY = clamp(hpY,541 - 3,541 + 3);
+if instance_exists(objPlayer) and objPlayer.y &gt;= 560
+{
+    hpY = lerp(hpY,clamp(hpY,12 - 3,12 + 3),0.2);
+}
+else
+{
+    hpY = lerp(hpY,clamp(hpY,541 - 3,541 + 3),0.2);
+}
 
 if instance_exists(enemy)
 {
@@ -65,6 +108,7 @@ if instance_exists(enemy)
     draw_sprite_ext(sprHealthbarBg,1,hpX + 23,hpY  + 20,1,1,0,c_white,enemy.image_alpha);
     draw_sprite_ext(sprHealthbarInner,0,hpX + 23,hpY + 20,hpXscale,1,0,c_white,enemy.image_alpha)
     draw_sprite_ext(sprHealthbarBorder,1,hpX,hpY,1,1,0,c_white,enemy.image_alpha);
+    //show_debug_message(string(enemy.image_alpha));
 }
 </string>
           </argument>

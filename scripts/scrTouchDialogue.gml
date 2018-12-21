@@ -8,10 +8,10 @@ if instance_exists(objPlayer)
 }
 if characters <= string_length(message[type,messageCurrent]) and response = 0 and wait = waitMax
 {
-    hold = keyboard_check_pressed(vk_shift);
-    if hold
+    hold = keyboard_check_pressed(vk_shift)
+    if hold = true
     {
-        characters = string_length(message[type,messageCurrent]) - 1
+        characters = string_length(message[type,messageCurrent]) - 1;
     }
     characters += increase;
     messageDraw = string_copy(message[type,messageCurrent],1,characters);

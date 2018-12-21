@@ -53,7 +53,7 @@ smoothTransition = true;   //sets whether the player wraps around the screen for
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (other.x &lt; 0 || other.x &gt; room_width || other.y &lt; 0 || other.y &gt; room_height)  //check if player has left the room
+            <string>if (other.x &lt; 0 || other.x &gt; room_width || other.y &lt; 0 || other.y &gt; room_height)  //check if kid has left the room
 {
     if (!smoothTransition)  //not using smooth transition, use default warp
     {
@@ -69,22 +69,36 @@ smoothTransition = true;   //sets whether the player wraps around the screen for
         {
             other.x -= room_width;
         }
-        if (other.y &lt; 0)
+        if (other.y &lt;= 8)
         {
             other.y += room_height;
         }
         if (other.y &gt; room_height)
         {
-            other.y -= room_height;
+            if !instance_exists(objSlideTransition)
+            {
+                other.y -= room_height;
+            }
         }
         
         if !instance_exists(objSlideTransition)
         {
             instance_create(0,0,objSlideTransition);
             room_goto(roomTo);
+            with objPlayer
+            {
+                oldGravity = gravity;
+                oldHspeed = hspeed;
+                oldVspeed = vspeed;
+                gravity = 0;
+                hspeed = 0;
+                vspeed = 0;
+                frozen = true;
+            }
         }
     }
 }
+
 </string>
           </argument>
         </arguments>

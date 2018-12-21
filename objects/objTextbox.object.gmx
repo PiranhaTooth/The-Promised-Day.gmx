@@ -28,7 +28,7 @@
             <string>///setting variables and stuff
 image_alpha = 0;
 sprite = sprKidPortrait;
-speakerObject = objPlayer;
+speakerObject = -1;
 type = 0;
 messageCurrent = 0;
 questionCurrent = 0;
@@ -93,6 +93,8 @@ messageLength = string_length(message[type,messageCurrent]);
 
 xx = 0;
 yy = 0;
+
+speechBubble = false;
 </string>
           </argument>
         </arguments>
@@ -132,6 +134,23 @@ if interact = false
             if pressed = true
             {
                 scrTouchDialogue();
+            }
+        }
+        if speechBubble = true
+        {
+            if distance_to_object(objPlayer) &lt; 64 and pressed = false
+            {
+                if !instance_exists(objSpeechBubble)
+                {
+                    instance_create(x+16,y+16,objSpeechBubble);
+                }
+            }
+            else
+            {
+                if instance_exists(objSpeechBubble)
+                {
+                    objSpeechBubble.fadeIn = false;
+                }
             }
         }
     }
@@ -178,7 +197,7 @@ if hold = 0
 {
     if string_char_at(message[type,messageCurrent],characters) = "," 
     {
-        waitMax = 15;    
+        waitMax = 7;    
         if wait &lt; waitMax
         {
             wait += 1;
@@ -189,7 +208,7 @@ if hold = 0
     }
     else if string_char_at(message[type,messageCurrent],characters) = "!" or string_char_at(message[type,messageCurrent],characters) = "?" or string_char_at(message[type,messageCurrent],characters) = "." and string_char_at(message[type,messageCurrent],characters-1) != "." and string_char_at(message[type,messageCurrent],characters+1) != "."
     {
-        waitMax = 30;  
+        waitMax = 15;  
         if wait &lt; waitMax
         {
             wait += 1;
@@ -200,7 +219,7 @@ if hold = 0
     }
     else if string_char_at(message[type,messageCurrent],characters) = "-" and string_char_at(message[type,messageCurrent],characters + 1) = " "
     {
-        waitMax = 30;  
+        waitMax = 15;  
         if wait &lt; waitMax
         {
             wait += 1;
@@ -214,7 +233,7 @@ if hold = 0
        string_char_at(message[type,messageCurrent],characters-1) + 
        string_char_at(message[type,messageCurrent],characters) = "..."
     {
-        waitMax = 50
+        waitMax = 25
         if wait &lt; waitMax
         {
             wait += 1;
@@ -402,15 +421,15 @@ if interact = false
 {
     if instance_exists(objPlayer) and place_meeting(x,y,objPlayer) and npc = 0
     {
-    scrDialoguePortraits();
+        scrDialoguePortraits();
     }
     else if npc = 2
     {
-    scrDialoguePortraits();
+        scrDialoguePortraits();
     }
     else if npc = 1 and pressed = true
     {
-    scrDialoguePortraits();
+        scrDialoguePortraits();
     }
 }
 </string>

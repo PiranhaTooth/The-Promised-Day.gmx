@@ -158,6 +158,7 @@
     <instance objName="objBlock" x="704" y="-32" name="inst_8BC54DFE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="736" y="-32" name="inst_7AFF9E01" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="768" y="-32" name="inst_EA9957CD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objSpikeUp" x="544" y="128" name="inst_1B04338F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bgGrasslandsDark" x="64" y="160" w="32" h="32" xo="32" yo="0" id="10016872" name="inst_9D56652D" depth="1000005" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

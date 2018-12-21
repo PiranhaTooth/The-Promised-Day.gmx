@@ -94,6 +94,8 @@ xx = 0;
 yy = 0;
 
 messageLength = string_length(message[messageCurrent]);
+
+speechBubble = true;
 </string>
           </argument>
         </arguments>
@@ -124,8 +126,26 @@ if instance_exists(objPlayer)
         interact = false;
         pressed = true
     }
+    if speechBubble = true
+    {
+        if distance_to_object(objPlayer) &lt; 64 and pressed = false
+        {
+            if !instance_exists(objSpeechBubble)
+            {
+                instance_create(x,y,objSpeechBubble);
+            }
+        }
+        else
+        {
+            if instance_exists(objSpeechBubble)
+            {
+                objSpeechBubble.fadeIn = false;
+            }
+        }
+    }
     scrNPCDialogue(); 
 }
+
 </string>
           </argument>
         </arguments>
@@ -152,7 +172,7 @@ if hold = 0
 {
     if string_char_at(message[type,messageCurrent],characters) = "," 
     {
-        waitMax = 15;    
+        waitMax = 7;    
         if wait &lt; waitMax
         {
             wait += 1;
@@ -163,7 +183,7 @@ if hold = 0
     }
     else if string_char_at(message[type,messageCurrent],characters) = "!" or string_char_at(message[type,messageCurrent],characters) = "?" or string_char_at(message[type,messageCurrent],characters) = "." and string_char_at(message[type,messageCurrent],characters-1) != "." and string_char_at(message[type,messageCurrent],characters+1) != "."
     {
-        waitMax = 30;  
+        waitMax = 15;  
         if wait &lt; waitMax
         {
             wait += 1;
@@ -174,7 +194,7 @@ if hold = 0
     }
     else if string_char_at(message[type,messageCurrent],characters) = "-" and string_char_at(message[type,messageCurrent],characters + 1) = " "
     {
-        waitMax = 30;  
+        waitMax = 15;  
         if wait &lt; waitMax
         {
             wait += 1;
@@ -188,7 +208,7 @@ if hold = 0
        string_char_at(message[type,messageCurrent],characters-1) + 
        string_char_at(message[type,messageCurrent],characters) = "..."
     {
-        waitMax = 50
+        waitMax = 25
         if wait &lt; waitMax
         {
             wait += 1;

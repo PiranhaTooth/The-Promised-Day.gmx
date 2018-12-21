@@ -40,6 +40,8 @@ if (loadFile)
         global.savePlayerLevel = ds_map_find_value(saveMap,"savePlayerLevel");
         global.savePlayerExperience = ds_map_find_value(saveMap,"savePlayerExperience");
         
+        global.boss1Spawned = ds_map_find_value(saveMap,"boss1Spawned");
+        
         if (is_string(global.saveRoom))   //check if the saved room loaded properly
         {
             if (!room_exists(asset_get_index(global.saveRoom)))  //check if the room index in the save is valid
@@ -60,14 +62,24 @@ if (loadFile)
             global.saveBossItem[i] = ds_map_find_value(saveMap,"saveBossItem["+string(i)+"]");
         }
         
-        for (var rm = 0; rm < 250; rm++)
+        for (var rm = 0; rm < 100; rm++)
         {
-            for (var idd = 0; idd < 10; idd++)
+            for (var idd = 0; idd < 5; idd++)
             {
                 global.saveEnemyKilled[rm,idd] = ds_map_find_value(saveMap,"saveEnemyKilled[" + string(rm) + "," + string(idd) + "]")
             }
         }
-                
+        
+        for (var i = 0; i < 6; i++)
+        {
+            global.saveBossDead[i] = ds_map_find_value(saveMap,"saveBossDead[" + string(i) + "]");
+        }
+            
+        for (var idd = 0; idd < 20; idd++)
+        {
+            global.saveDesertDoorOpened[idd] = ds_map_find_value(saveMap,"saveDesertDoorOpened["+string(idd)+"]");
+        }
+            
         global.saveGameClear = ds_map_find_value(saveMap,"saveGameClear");
         
         //load md5 string from the save map
@@ -126,11 +138,30 @@ for (var i = 0; i < global.bossItemTotal; i++)
     global.bossItem[i] = global.saveBossItem[i];
 }
 
-for (var rm = 0; rm < 250; rm++)
+for (var rm = 0; rm < 100; rm++)
 {
-    for (var idd = 0; idd < 10; idd++)
+    for (var idd = 0; idd < 5; idd++)
     {
         global.enemyKilled[rm,idd] = global.saveEnemyKilled[rm,idd];
+    }
+}
+
+for (var i = 0; i < 6; i++)
+{
+    global.bossDead[i] = global.saveBossDead[i];
+}
+
+for (var idd = 0; idd < 20; idd++)
+{
+    global.desertDoorOpened[idd] = global.saveDesertDoorOpened[idd];
+}
+
+if instance_exists(objTorch)
+{
+    with objTorch
+    {
+        x = global.savePlayerX;
+        y = global.savePlayerY;
     }
 }
 

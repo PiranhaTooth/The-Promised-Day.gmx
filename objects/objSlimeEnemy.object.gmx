@@ -74,6 +74,11 @@ expGiven = false;
           <argument>
             <kind>1</kind>
             <string>global.enemyKilled[room,idd] = true;
+
+if state = DEAD
+{
+    scrDropExp(4);
+}
 </string>
           </argument>
         </arguments>
@@ -331,11 +336,6 @@ with objBullet
 }
 if hp &lt;= 0 
 {
-    if expGiven = false
-    {
-        global.playerExperience += irandom_range(18,22);
-        expGiven = true;
-    }
     if !audio_is_playing(sndSlimeDeath)
     {
         audio_play_sound(sndSlimeDeath,10,false);   

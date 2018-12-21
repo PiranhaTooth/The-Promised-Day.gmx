@@ -92,7 +92,7 @@
     <instance objName="objBlock" x="640" y="224" name="inst_275925EE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="672" y="224" name="inst_E25C19CD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="704" y="256" name="inst_2D8B3683" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objTownTransition" x="-38" y="1" name="inst_9CD84F5B" locked="0" code="roomTo = rBeachTown;&#xA;location = &quot;Beachside Town&quot;;&#xA;warpX = 1152;&#xA;warpY = 448;&#xA;" scaleX="1" scaleY="14" colour="4294967295" rotation="0"/>
+    <instance objName="objTownTransition" x="-32" y="0" name="inst_9CD84F5B" locked="0" code="roomTo = rBeachTown;&#xA;locationSprite = sprBeachTown;&#xA;warpX = 1152;&#xA;warpY = 448;&#xA;" scaleX="1" scaleY="14" colour="4294967295" rotation="0"/>
     <instance objName="objPlayerStart" x="32" y="416" name="inst_0D70CE01" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objOutsideRoomChanger" x="800" y="0" name="inst_A70D91F3" locked="0" code="roomTo = r2Grasslands;" scaleX="1" scaleY="9" colour="4294967295" rotation="0"/>
     <instance objName="objSave" x="64" y="384" name="inst_ED4726DA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

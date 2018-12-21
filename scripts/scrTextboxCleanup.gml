@@ -6,6 +6,7 @@ questionCurrent = 0;
 actionCurrent = 0;
 speakerCurrent = 0;
 type = 0;
+hold = false;
 
 response = 0;
 pressed = false;

@@ -87,13 +87,20 @@ timer = 0;
             <kind>1</kind>
             <string>x = view_xview[0] + 400;
 y = view_yview[0] + 304;
+if global.transitioning = true
+{
+    draw_self();
+    draw_set_alpha(alpha);
+    draw_set_font(fntMenu);
+    draw_set_color(c_white);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_center);
+}
 
-draw_self();
-draw_set_alpha(alpha);
-draw_set_font(fntMenu);
-draw_set_color(c_white);
-draw_set_halign(fa_center);
-draw_set_valign(fa_center);
+if global.transitioning = false
+{
+    draw_set_alpha(1);
+}
 </string>
           </argument>
         </arguments>

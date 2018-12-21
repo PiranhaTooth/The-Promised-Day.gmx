@@ -47,8 +47,16 @@ if (global.autosave) //save the game if currently set to autosave
     global.autosave = false;
 }
 
-expNeeded = 0;
 animated = false;
+
+global.playerX = x;
+global.playerY = y;
+
+oldGravity = gravity;  //
+oldHspeed = hspeed;   //    all 3 of these are used to store the player's movement variables while switching screens
+oldVspeed = vspeed;  //
+
+lastKey = 1;    //used to lerp the image_xscale
 </string>
           </argument>
         </arguments>
@@ -165,11 +173,33 @@ var notOnBlock = (place_free(x,y+(global.grav)));
 var onVineL = (place_meeting(x-1,y,objWalljumpL) &amp;&amp; notOnBlock);
 var onVineR = (place_meeting(x+1,y,objWalljumpR) &amp;&amp; notOnBlock);
 
+//last key pressed check | -1 = left, 1 = right
+if keyboard_check(vk_left) = true
+{
+    lastKey = -1;
+}
+if keyboard_check(vk_right) = true
+{
+    lastKey = 1;
+}
+
+if xScale &lt; 0
+{
+    xScale = lerp(xScale,lastKey,0.2);
+}
+else
+{
+    xScale = lerp(xScale,lastKey,0.2);
+}
+
 if (h != 0)  //player is moving
 {
     if (!onVineR &amp;&amp; !onVineL)   //make sure not currently touching a vine
     {
-        xScale = h;
+        if round(xScale) != h
+        {
+            xScale = lerp(xScale,h,0.2);
+        }
     }
     if ((h == -1 &amp;&amp; !onVineR) || (h == 1 &amp;&amp; !onVineL))
     {
@@ -183,8 +213,7 @@ if (h != 0)  //player is moving
             
             if (abs(hspeed) &gt; maxSpeed)
                 hspeed = maxSpeed * h;
-        }
-        
+        }        
         sprite_index = sprPlayerRunning;
         image_speed = 0.5;
     }
@@ -238,7 +267,9 @@ if (!frozen)    //check if frozen before doing anything
     if (scrButtonCheckPressed(global.shootButton))
         scrPlayerShoot();
     if (scrButtonCheckPressed(global.jumpButton))
+    {
         scrPlayerJump();
+    }
     if (scrButtonCheckReleased(global.jumpButton))
         scrPlayerVJump();
     if (scrButtonCheckPressed(global.suicideButton))
@@ -461,6 +492,62 @@ else
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///debug
+
+if gamepad_button_check_pressed(0,gp_shoulderr)
+{
+    scrSaveGame(1);
+    if !audio_is_playing(sndItem)
+    {
+        audio_play_sound(sndItem,10,0);
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="objTorch">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if objTorch.pickedUp = 2 and scrButtonCheckPressed(global.upButton)
+{
+    objTorch.pickedUp = 1;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="4" ename="objPlayerKiller">
       <action>
@@ -479,7 +566,10 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>scrKillPlayer();
+            <string>if other.image_alpha != 0
+{
+    scrKillPlayer();
+}
 </string>
           </argument>
         </arguments>
@@ -535,6 +625,59 @@ else    //flipped
 }
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="objOtherBlock">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!place_free(x+hspeed,y))
+{
+    if (global.grav == 1)   //normal
+    {
+        if(hspeed &lt;= 0){move_contact_solid(180,abs(hspeed));}
+        if(hspeed &gt; 0){move_contact_solid(0,abs(hspeed));}
+    }
+    else    //flipped
+    {
+        if(hspeed &lt; 0){move_contact_solid(180,abs(hspeed));}
+        if(hspeed &gt;= 0){move_contact_solid(0,abs(hspeed));}
+    }
+    hspeed = 0;
+}
+ 
+if (!place_free(x,y+vspeed))
+{
+    if (global.grav == 1)   //normal
+    {
+        if(vspeed &lt;= 0){move_contact_solid(90,abs(vspeed));}
+        if(vspeed &gt; 0){move_contact_solid(270,abs(vspeed));djump=1;}
+    }
+    else    //flipped
+    {
+        if(vspeed &lt;= 0){move_contact_solid(90,abs(vspeed));djump=1;}
+        if(vspeed &gt; 0){move_contact_solid(270,abs(vspeed));}
+    }
+    vspeed = 0;
+}
+
+if (!place_free(x+hspeed,y+vspeed)) {hspeed = 0;}
 </string>
           </argument>
         </arguments>
@@ -627,43 +770,6 @@ if view_current = 0
     if (global.debugShowHitbox)
         draw_sprite_ext(mask_index,image_index,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha*0.8);
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///level up / levels
-/*
-draw_text(32,32,"Level: " + string(global.playerLevel));
-draw_text(32,64,"Exp: " + string(global.playerExperience) + " / " + string(expNeeded));
-*/
-expNeeded = 100 * (1 + (global.playerLevel * 0.1));
-
-if (global.playerExperience / expNeeded) &gt;= 1
-{
-    global.playerLevel ++;
-    global.playerExperience = 0;
-    if !instance_exists(objLevelUp)
-    {
-        instance_create(x,y+8,objLevelUp);
-    }
-}
-
 </string>
           </argument>
         </arguments>

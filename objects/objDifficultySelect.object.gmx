@@ -38,12 +38,11 @@ xx2[1] = x + 16;
 xx[2] = x;
 xx2[2] = x + 16;
 
-flickerEnable = false;
-flickerTimer = 0;
-
-xseperation = 32;
+xseperation = 24;
 yseperation = 52;
-instance_create(64 - xseperation, 352 + (yseperation * selection) + 26,objSelector);
+instance_create(64 - xseperation, 366 + (yseperation * selection) + 26,objSelector);
+
+textAlpha = 0;
 
 if (file_exists("Data\save"))  //check if current save exists
 {
@@ -148,51 +147,7 @@ timeStr += string(floor(t));
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if flickerEnable = true
-{
-   flickerTimer += 1;
-   if flickerTimer = 33
-   {
-        objBackgroundRed.alpha = 0.75;
-        objMovingTileTop.image_index = 1;
-        objMovingTile.image_index = 1;
-        objMovingTileBackgroundTop.image_index = 1;
-        objMovingTileBackgroundBottom.image_index = 1;
-   }
-   if flickerTimer = 38
-   {
-        objBackgroundRed.alpha = 0.1;
-        objMovingTileTop.image_index = 0;
-        objMovingTile.image_index = 0;
-        objMovingTileBackgroundTop.image_index = 0;
-        objMovingTileBackgroundBottom.image_index = 0;
-   }
-   if flickerTimer = 45
-   {
-        objBackgroundRed.alpha = 82.5;
-        objMovingTileTop.image_index = 1;
-        objMovingTile.image_index = 1;
-        objMovingTileBackgroundTop.image_index = 1;
-        objMovingTileBackgroundBottom.image_index = 1;
-   }
-   if flickerTimer = 50
-   {
-        objBackgroundRed.alpha = 0.25;
-        objMovingTileTop.image_index = 0;
-        objMovingTile.image_index = 0;
-        objMovingTileBackgroundTop.image_index = 0;
-        objMovingTileBackgroundBottom.image_index = 0;
-   }
-   if flickerTimer = 65
-   {
-        objBackgroundRed.alpha = 1;
-        objMovingTileTop.image_index = 1;
-        objMovingTile.image_index = 1;
-        objMovingTileBackgroundTop.image_index = 1;
-        objMovingTileBackgroundBottom.image_index = 1;
-   }
-}
-if scrButtonCheckPressed(global.menuDownButton)
+            <string>if scrButtonCheckPressed(global.menuDownButton)
 {
     if selection = 2
     {
@@ -220,7 +175,6 @@ if scrButtonCheckPressed(global.menuAcceptButton)
     if selection = 0 and selected = false
     {
         selected = true;
-        flickerEnable = true;
         if file_exists("Data\save")
         {
             file_delete("Data\save");
@@ -333,11 +287,22 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_halign(fa_left);
+            <string>if textAlpha != 0.8
+{
+    textAlpha = lerp(textAlpha,0.8,0.25);
+}
+
+draw_set_halign(fa_left);
 draw_set_font(fntMenu);
-scrDrawTextOutline(xx[0],288,"New Game",c_black,c_white);
-scrDrawTextOutline(xx[1],288 + yseperation,"Load Game",c_black,c_white);
-scrDrawTextOutline(xx[2],288 + (yseperation * 2),"Options",c_black,c_white);
+draw_set_alpha(textAlpha);
+draw_set_color(c_white);
+
+draw_text(xx[0],338,"New Game");
+draw_text(xx[1],338 + yseperation,"Load Game");
+draw_text(xx[2],338 + (yseperation * 2),"Options");
+
+//draw_set_alpha(1);
+
 </string>
           </argument>
         </arguments>

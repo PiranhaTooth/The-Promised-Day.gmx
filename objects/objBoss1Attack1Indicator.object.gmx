@@ -55,30 +55,32 @@ count = 0
             <string>count += 1;
 
 y = ystart + magnitude * sin((count mod period) / period * pi * 2)
-
-if objPlayer.x &lt; x
+if instance_exists(objPlayer)
 {
-    if hspeed &gt; -1
+    if objPlayer.x &lt; x
     {
-        hspeed -= 0.15;
+        if hspeed &gt; -1
+        {
+            hspeed -= 0.15;
+        }
     }
-}
-if objPlayer.x &gt; x
-{
-    if hspeed &lt; 1
+    if objPlayer.x &gt; x
     {
-        hspeed += 0.15;
+        if hspeed &lt; 1
+        {
+            hspeed += 0.15;
+        }
     }
-}
-if objPlayer.x = x
-{
-    hspeed = 0;
-}
-
-
-if (count mod 75) == 1
-{
-    instance_create(x,y,objBoss1Attack1IndicatorEffect);
+    if objPlayer.x = x
+    {
+        hspeed = 0;
+    }
+    
+    
+    if (count mod 75) == 1
+    {
+        instance_create(x,y,objBoss1Attack1IndicatorEffect);
+    }
 }
 </string>
           </argument>

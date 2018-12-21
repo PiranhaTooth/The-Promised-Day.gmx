@@ -17,25 +17,25 @@ global.playerExperience = 0;
 global.playerLevel = 1;
 global.damage = power((global.playerLevel / 10) + 1,1.5)
 
-for (var i = global.secretItemTotal-1; i >= 0; i--)
-{
-    global.secretItem[i] = false;
-    global.saveSecretItem[i] = false;
-}
-
-for (var i = global.bossItemTotal-1; i >= 0; i--)
-{
-    global.bossItem[i] = false;
-    global.saveBossItem[i] = false;
-}
-
-
 for (var rm = 0; rm < 250; rm++)
 {
     for (var idd = 0; idd < 10; idd++)
     {
         global.enemyKilled[rm,idd] = false; // [current room , enemy id]
     }
+}
+
+//boss spawned?
+global.boss1Spawned = false;
+
+for (var i = 0; i < 6; i++)
+{
+    global.bossDead[i] = false;
+}
+
+for (var i = 0; i < 20; i++)
+{    
+    global.desertDoorOpened[i] = false;
 }
 
 
@@ -88,3 +88,15 @@ global.controllerMode = false;  //keeps track of whether to use keyboard or cont
 global.controllerDelay = -1;    //handles delay between switching between keyboard/controller so that the player can't use both at the same time
 
 randomize();    //make sure the game starts with a random seed for RNG
+
+for (var i = global.secretItemTotal-1; i >= 0; i--)
+{
+    global.secretItem[i] = false;
+    global.saveSecretItem[i] = false;
+}
+
+for (var i = global.bossItemTotal-1; i >= 0; i--)
+{
+    global.bossItem[i] = false;
+    global.saveBossItem[i] = false;
+}

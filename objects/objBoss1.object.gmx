@@ -25,12 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>counter = 0;
+            <string>//actual boss stuff
+counter = 0;
+global.noPause = true;
 
 instance_create(x,y,objBoss1Hitbox);
-if !audio_is_playing(musBoss1) {scrPlayMusic(musBoss1,false);}
 
-image_alpha = 0;
+image_alpha = 1;
 image_speed = 1/5;
 
 hasJumped = false;
@@ -59,12 +60,19 @@ attack3IntroDone = false;
 
 //attack4
 attack4Angle = 0
+attack4IntroDone = false;
 
 //fillerAttack
 timer = 0;
 targetX = 0;
 targetY = 0;
 fillerAttackCount = 0;
+fillerAttackAmount = irandom_range(1,2);
+
+//dead
+soundPitch = 1;
+deadTimer = 0;
+expGiven = false;
 
 INTRO = 1;
 MOVING = 2;
@@ -85,14 +93,35 @@ attackTimerMax = 0;
 debugTimer = 0;
 
 //boss variables
-hp = 70
-hpMax = 250;
+hp = 320
+hpMax = 320;
 
 ///spawn hp bar
 if !instance_exists(objHP)
 {
     instance_create(50,541,objHP);
 }
+
+//delete save in room
+if instance_exists(objSave)
+{
+    with objSave
+    {
+        instance_destroy();
+    }
+}
+
+//check if boss has started fighting or not
+if global.boss1Spawned = true
+{
+    fighting = true;
+}
+else
+{
+    fighting = false;
+}
+
+if hasJumped = false {event_user(0);}
 </string>
           </argument>
         </arguments>
@@ -115,478 +144,499 @@ if !instance_exists(objHP)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///attacks and states
-if instance_exists(objPlayer)
+            <string>if instance_exists(objPlayer) and objPlayer.frozen = false and fighting = false
 {
-    timer += 1;
+    fighting = true;
 }
-//Attack finished
-if instance_exists(objPlayer)
+
+if fighting = true
 {
-    if attackComplete = true
+    if !audio_is_playing(musBoss1) 
     {
+        scrPlayMusic(musBoss1,false);
+    }
+    ///attacks and states
+    if instance_exists(objPlayer)
+    {
+        timer += 1;
+    }
+    //Attack finished
+    if instance_exists(objPlayer)
+    {
+        if attackComplete = true
+        {
+            switch state
+            {
+                case INTRO:
+                {
+                    attackTimer = 0;
+                    attackTimerMax = irandom_range(80,150);
+                    state = MOVING; 
+                    statePrevious = INTRO; 
+                }
+                break;
+                case MOVING:
+                {
+                    statePrevious = MOVING;
+                    if statePrevious = MOVING {jumpCounter ++;}
+                    if jumpCounter &lt; 3 {state = MOVING;} 
+                    else 
+                    {
+                        switch attackPrevious
+                        {
+                            case INTRO:
+                            {
+                                state = ATTACK1;
+                            }break;
+                            case ATTACK1:
+                            {
+                                state = ATTACK2;
+                            }break;
+                            case ATTACK2:
+                            {
+                                state = ATTACK3;
+                            }break;
+                            case ATTACK3:
+                            {
+                                state = ATTACK4;
+                            }break;
+                            case ATTACK4:
+                            {
+                                state = ATTACK1;
+                            }break;
+                        }
+                        jumpCounter = 0;
+                    }
+                    
+                    attackTimer = 0;
+                    attackTimerMax = irandom_range(80,150);
+                    hasJumped = false;
+                    jumpWindUp = 0;
+                    attackComplete = false;
+                }
+                break;            
+                case ATTACK1:
+                {
+                    state = MOVING;
+                    attackTimer = 0;
+                    attack1WindUp = 0;
+                    attackComplete = false;
+                    statePrevious = ATTACK1;
+                    attackPrevious = ATTACK1;
+                    attack1Shook = false;
+                    attack1Sound = 2;
+                }
+                break;
+                case ATTACK2:
+                {
+                    state = MOVING;
+                    hasJumped = false;
+                    attack2IntroDone = false;
+                    attack2JumpTimer = 0;
+                    attackTimer = 0;
+                    attackComplete = false;
+                    attack2Timer1 = 0;
+                    attack2Timer2 = 0;
+                    attack2Dir1 = 180;
+                    attack2Dir2 = 0;
+                    statePrevious = ATTACK2;
+                    attackPrevious = ATTACK2;
+                }
+                break;
+                case ATTACK3:
+                {
+                    state = MOVING;
+                    attackComplete = false;
+                    attackTimer = 0;
+                    statePrevious = ATTACK3;
+                    attackPrevious = ATTACK3;
+                    attack3IntroDone = false;
+                }
+                break;
+                case ATTACK4:
+                {
+                    state = MOVING;
+                    attackComplete = false;
+                    attackTimer = 0;
+                    statePrevious = ATTACK4;
+                    attackPrevious = ATTACK4;
+                    attack4IntroDone = false;
+                }
+                break;
+            }
+        }
+    
+        //Attack started
+        /*
+        if timer = 3801
+        {
+            state = ATTACK4;
+            attackTimer = 0;
+        }*/
+        if timer = 4400
+        {
+            state = FILLERATTACK;
+        }
+        
         switch state
         {
+        //put outside of the fighting braces
+        
             case INTRO:
             {
-                attackTimer = 0;
-                attackTimerMax = irandom_range(80,150);
-                state = MOVING; 
-                statePrevious = INTRO; 
+                //if hasJumped = false {event_user(0);}
+                if image_alpha &lt; 0.95 {image_alpha += 0.05;}  
+                break;
             }
-            break;
+        
             case MOVING:
             {
-                statePrevious = MOVING;
-                if statePrevious = MOVING {jumpCounter ++;}
-                if jumpCounter &lt; 3 {state = MOVING;} 
-                else 
+                if attackTimer &lt; attackTimerMax and place_meeting(x,y + 8,objBlock) 
                 {
-                    switch attackPrevious
-                    {
-                        case INTRO:
-                        {
-                            state = ATTACK1;
-                        }break;
-                        case ATTACK1:
-                        {
-                            state = ATTACK2;
-                        }break;
-                        case ATTACK2:
-                        {
-                            state = ATTACK3;
-                        }break;
-                        case ATTACK3:
-                        {
-                            state = ATTACK4;
-                        }break;
-                        case ATTACK4:
-                        {
-                            state = ATTACK1;
-                        }break;
-                    }
-                    jumpCounter = 0;
+                    attackTimer += 1;
                 }
-                
-                attackTimer = 0;
-                attackTimerMax = irandom_range(80,150);
-                hasJumped = false;
-                jumpWindUp = 0;
-                attackComplete = false;
+                if attackTimer = round(attackTimerMax/2)
+                {
+                    if objPlayer.x &lt; x
+                    {
+                        image_xscale = 1;   
+                    }
+                    if objPlayer.x &gt; x
+                    {
+                        image_xscale = -1;
+                    }
+                    jumpWindUp = 1
+                }           
+                if jumpWindUp = 1
+                {
+                    if image_speed &lt; 0.6 {image_speed += 0.005;}
+                    if image_yscale &gt; 0.75 {image_yscale -= 0.005; if objPlayer.x &lt; x {image_xscale = 1;} else {image_xscale = -1}}
+                    if image_yscale &lt;= 0.75 {jumpWindUp = 2;}            
+                }
+                if jumpWindUp = 2 and attackTimer = attackTimerMax
+                {               
+                    if objPlayer.x &lt; x {image_xscale = 1;} else {image_xscale = -1;}                
+                    image_yscale = 1;                
+                    if hasJumped = false {event_user(0);}
+                }
             }
-            break;            
+            break;
             case ATTACK1:
             {
-                state = MOVING;
-                attackTimer = 0;
-                attack1WindUp = 0;
-                attackComplete = false;
-                statePrevious = ATTACK1;
-                attackPrevious = ATTACK1;
-                attack1Shook = false;
-                attack1Sound = 2;
+                if attack1WindUp = 0
+                {
+                    if !audio_is_playing(sndBoss1Attack1Windup) {audio_play_sound(sndBoss1Attack1Windup,10,false);}
+                    if image_yscale &gt; 0.65 
+                    {
+                        image_yscale = lerp(image_yscale,0.65,0.05);                    
+                        if objPlayer.x &lt; x 
+                        {
+                            image_xscale = 1;
+                        } 
+                        else 
+                        {
+                            image_xscale = -1;
+                        }
+                    }
+                    if image_yscale &lt; 0.66
+                    {
+                        sprite_index = sprBoss1Jump;
+                        hspeed = 1 * -image_xscale;
+                        attack1WindUp =   1
+                    }
+                }
+                if attack1WindUp = 1
+                {
+                    if attack1Shook = false {scrScreenShake(10,7); attack1Shook = true;}
+                    if objPlayer.x &lt; x {image_xscale = image_yscale;} else {image_xscale = -image_yscale;}
+                    image_yscale = lerp(image_yscale,1.2,0.2);
+                    if objPlayer.x &lt; x 
+                    {
+                        image_xscale = lerp(image_xscale,0.6,0.2);
+                    } 
+                    else 
+                    {
+                        image_xscale = lerp(image_xscale,-0.6,0.2);
+                    }
+                    if y &gt; 0 {vspeed = -14;} 
+                    else 
+                    { 
+                        vspeed = 0;
+                        image_yscale = 1; 
+                        if !instance_exists(objBoss1Attack1Indicator) {instance_create(x,64,objBoss1Attack1Indicator);}
+                        if instance_exists(objBoss1Attack1Indicator) {objBoss1.x = objBoss1Attack1Indicator.x;}
+                        if attackTimer &lt; 256 {attackTimer += 1;}
+                        if attackTimer mod 25 = 0
+                        {
+                            if attack1Sound mod 2 == 0
+                            {
+                                audio_play_sound(sndBoss1Attack1,10,0);
+                            }
+                            attack1Sound ++;
+                        }
+                        if attackTimer mod 50 = 0
+                        {
+                            repeat(6) {instance_create(objBoss1Attack1Indicator.x,objBoss1Attack1Indicator.y - 128,objBoss1Attack1_2);}
+                            scrScreenShake(15,12);
+                        }
+                        if attackTimer = 225
+                        {
+                            attack1WindUp = 2;
+                        }
+                    }
+                } 
+                if attack1WindUp = 2
+                {
+                    with objBoss1Attack1Indicator {instance_destroy();}
+                    hspeed = 1 * -image_xscale;   
+                    vspeed = 18;
+                    attack1WindUp = 3;
+                } 
+                if attack1WindUp = 4
+                {
+                    attackTimer ++;
+                    if attackTimer = 1
+                    {
+                        scrScreenShake(14,10);
+                    }
+                    if attackTimer &gt;= 15
+                    {
+                        attackComplete = true;
+                    }                
+                }       
             }
             break;
             case ATTACK2:
             {
-                state = MOVING;
-                hasJumped = false;
-                attack2IntroDone = false;
-                attack2JumpTimer = 0;
-                attackTimer = 0;
-                attackComplete = false;
-                attack2Timer1 = 0;
-                attack2Timer2 = 0;
-                attack2Dir1 = 180;
-                attack2Dir2 = 0;
-                statePrevious = ATTACK2;
-                attackPrevious = ATTACK2;
+                if attack2IntroDone = false and !instance_exists(objBoss1Attack2Intro1) 
+                {
+                    instance_create(x-(20 * image_xscale),y-42,objBoss1Attack2Intro1);
+                    audio_play_sound(sndBoss1Attack2Windup,10,false);
+                }
+                if attack2IntroDone = true
+                {
+                    if instance_exists(objBoss1Attack2Intro1) {with objBoss1Attack2Intro1 {instance_destroy();}}
+                    attackTimer += 1;
+                    attack2Timer1 += 1;
+                    if (attack2Timer1 mod 10) = 0
+                    {
+                        instance_create(irandom_range(75,125),100,objBoss1Attack2);
+                        attack2Dir1 += 18.8;
+                        audio_play_sound(sndBoss1Attack2,10,false);
+                    }
+                    attack2Timer2 += 1;
+                    if (attack2Timer2 mod 10) = 0
+                    {
+                        instance_create(irandom_range(675,725),100,objBoss1Attack2_2);
+                        attack2Dir2 -= 18.8;
+                    }
+                    if place_meeting(x,y + 4, objBlock) and attackTimer &gt; 50 and attackTimer &lt; 550
+                    {
+                        attack2JumpTimer += 1;
+                        if attack2JumpTimer = 50
+                        {
+                            event_user(0);
+                        }
+                    }
+                    if attackTimer &gt;= 600
+                    {
+                        attackComplete = true;
+                        objBoss1Attack2Summon.destroy = true;
+                    }  
+                }      
             }
             break;
             case ATTACK3:
             {
-                state = MOVING;
-                attackComplete = false;
-                attackTimer = 0;
-                statePrevious = ATTACK3;
-                attackPrevious = ATTACK3;
-                attack3IntroDone = false;
+                attackTimer += 1;
+                if attackTimer = 20
+                {
+                    instance_create(64,448,objBoss1Attack3Warning);
+                    instance_create(736,448,objBoss1Attack3Warning);
+                }
+                if attackTimer = 120
+                {
+                    if attack3IntroDone = false
+                    {
+                        instance_create(64,516,objBoss1Attack3Summon);
+                        instance_create(736,516,objBoss1Attack3Summon);
+                        for(var i = 0; i &lt; 5; i++)
+                        {
+                            instance_create(64,368 + (attack3SpawnGap * i),objBoss1Attack3Left);
+                            instance_create(736,368 + (attack3SpawnGap * i),objBoss1Attack3Right);
+                        }
+                        if instance_exists(objBoss1Attack3Warning)
+                        {
+                            objBoss1Attack3Warning.fadeOut = true;
+                        }
+                        attack3IntroDone = true;
+                    }
+                }
+                if attackTimer = 135
+                {
+                    audio_play_sound(sndBoss1Attack3Summon,10,false);
+                }
+                if attackTimer = 220
+                {
+                    audio_play_sound(sndBoss1Attack3,10,false);
+                }
+                if attackTimer = 250
+                {
+                    audio_play_sound(sndBoss1Attack3,10,false);
+                }
+                if attackTimer &gt;= 470
+                {
+                    attackComplete = true;
+                }
             }
             break;
             case ATTACK4:
             {
-                state = MOVING;
-                attackComplete = false;
-                attackTimer = 0;
-                statePrevious = ATTACK4;
-                attackPrevious = ATTACK4;
-            }
-            break;
-        }
-    }
-
-    //Attack started
-    /*
-    if timer = 3801
-    {
-        state = ATTACK4;
-        attackTimer = 0;
-    }*/
-    if timer = 4400
-    {
-        state = FILLERATTACK;
-    }
-    
-    switch state
-    {
-        case INTRO:
-        {
-            if hasJumped = false {event_user(0);}
-            if image_alpha &lt; 0.95 {image_alpha += 0.05;}  
-            break;
-        }
-        case MOVING:
-        {
-            if attackTimer &lt; attackTimerMax and place_meeting(x,y + 8,objBlock) 
-            {
-                attackTimer += 1;
-            }
-            if attackTimer = round(attackTimerMax/2)
-            {
-                if objPlayer.x &lt; x
+                if attack4IntroDone = false and !instance_exists(objBoss1Attack4Intro1) 
                 {
-                    image_xscale = 1;   
-                }
-                if objPlayer.x &gt; x
-                {
-                    image_xscale = -1;
-                }
-                jumpWindUp = 1
-            }           
-            if jumpWindUp = 1
-            {
-                if image_speed &lt; 0.6 {image_speed += 0.005;}
-                if image_yscale &gt; 0.75 {image_yscale -= 0.005; if objPlayer.x &lt; x {image_xscale = 1;} else {image_xscale = -1}}
-                if image_yscale &lt;= 0.75 {jumpWindUp = 2;}            
-            }
-            if jumpWindUp = 2 and attackTimer = attackTimerMax
-            {               
-                if objPlayer.x &lt; x {image_xscale = 1;} else {image_xscale = -1;}                
-                image_yscale = 1;                
-                if hasJumped = false {event_user(0);}
-            }
-        }
-        break;
-        case ATTACK1:
-        {
-            if attack1WindUp = 0
-            {
-                if !audio_is_playing(sndBoss1Attack1Windup) {audio_play_sound(sndBoss1Attack1Windup,10,false);}
-                if image_yscale &gt; 0.65 
-                {
-                    image_yscale = lerp(image_yscale,0.65,0.05);                    
-                    if objPlayer.x &lt; x 
+                    instance_create(x-(20 * image_xscale),y-42,objBoss1Attack4Intro1);
+                    audio_play_sound(sndBoss1Attack2Windup,10,false);
+                    
+                    if !instance_exists(objBoss1Attack4Circle)
                     {
-                        image_xscale = 1;
-                    } 
-                    else 
-                    {
-                        image_xscale = -1;
+                        instance_create(400,150,objBoss1Attack4Circle);
                     }
                 }
-                if image_yscale &lt; 0.66
+                if attack4IntroDone = true
                 {
-                    sprite_index = sprBoss1Jump;
-                    hspeed = 1 * -image_xscale;
-                    attack1WindUp =   1
+                    attackTimer += 1;
+                    if attackTimer mod 35 = 0 and attackTimer &lt;= 300
+                    {
+                        scrMakeStar(400,150,10,5,5,4,attack4Angle,4,false,objBoss1Attack4);
+                        audio_play_sound(sndBoss1Attack4,10,false);
+                        attack4Angle = random(360);
+                        scrScreenShake(15,6);
+                        instance_create(400,150,objBoss1Attack4CircleEffect)
+                    }
                 }
             }
-            if attack1WindUp = 1
+            break;
+            case FILLERATTACK:
             {
-                if attack1Shook = false {scrScreenShake(10,7); attack1Shook = true;}
-                if objPlayer.x &lt; x {image_xscale = image_yscale;} else {image_xscale = -image_yscale;}
-                image_yscale = lerp(image_yscale,1.2,0.2);
-                if objPlayer.x &lt; x 
+                if timer = 4600
                 {
-                    image_xscale = lerp(image_xscale,0.6,0.2);
-                } 
-                else 
-                {
-                    image_xscale = lerp(image_xscale,-0.6,0.2);
-                }
-                if y &gt; 0 {vspeed = -14;} 
-                else 
-                { 
-                    vspeed = 0;
-                    image_yscale = 1; 
-                    if !instance_exists(objBoss1Attack1Indicator) {instance_create(x,64,objBoss1Attack1Indicator);}
-                    if instance_exists(objBoss1Attack1Indicator) {objBoss1.x = objBoss1Attack1Indicator.x;}
-                    if attackTimer &lt; 256 {attackTimer += 1;}
-                    if attackTimer mod 25 = 0
+                    if !instance_exists(objBoss1Disappear)
                     {
-                        if attack1Sound mod 2 == 0
+                        if objBoss1.image_xscale = -1
                         {
-                            audio_play_sound(sndBoss1Attack1,10,0);
+                            instance_create(x+16,y,objBoss1Disappear);
                         }
-                        attack1Sound ++;
+                        else
+                        {
+                            instance_create(x-16,y,objBoss1Disappear);
+                        }
                     }
-                    if attackTimer mod 50 = 0
+                }           
+                switch timer
+                {
+                    case 4678:
+                    case 4689:
+                    case 4712:
+                    case 4722:
+                    case 4748:
+                    case 4759:
+                    case 4783:
+                    case 4794:
+                    case 4815:
+                    case 4826:
+                    case 4850:
+                    case 4861:
+                    case 4884:
+                    case 4895:
+                    case 4930:
+                    case 4953:
+                    case 4964:
+                    case 4986:
+                    case 4997:
+                    case 5021:
+                    case 5032:
+                    case 5055:
+                    case 5066:
+                    case 5090:
+                    case 5100:
+                    case 5125:
+                    case 5136:
+                    case 5158:
+                    case 5170:
+                    case 5193:
+                    case 5204:
                     {
-                        repeat(6) {instance_create(objBoss1Attack1Indicator.x,objBoss1Attack1Indicator.y - 128,objBoss1Attack1_2);}
-                        scrScreenShake(15,12);
+                        audio_play_sound(sndBoss1FillerAttack,10,false);
+                        scrScreenShake(20,6);
+                        fillerAttackCount += 1;   
+                        if fillerAttackCount = 1 {instance_create(400,150,objBoss1Attack4CircleEffect)} else if fillerAttackCount &gt;= 2 {fillerAttackCount = 0;}
+                        for(var i = 0; i &lt; fillerAttackAmount; i++)
+                        {
+                            projectile = instance_create(400,150,objBoss1FillerAttack);
+                            projectile.image_angle = direction;
+                            projectile.vspeed = random_range(-4,-7);
+                            projectile.targetX = objPlayer.x - 32 + ( i * irandom_range(-84,142));
+                            projectile.targetY = 512;
+                            t = (-projectile.vspeed + sqrt(sqr(projectile.vspeed) + 2 * .3 * (560 - projectile.y)))/.3
+                            projectile.hspeed = (projectile.targetX - projectile.x) / t
+                            projectile.gravity = 0.25;
+                            fillerAttackAmount = irandom_range(1,2);
+                        }             
                     }
-                    if attackTimer = 225
+                    break;
+                }
+                if timer = 5315 and instance_exists(objBoss1Attack4Retract)
+                {
+                    objBoss1Attack4Retract.burst = true;
+                }
+                if timer = 5325
+                {
+                    if objPlayer.x &lt; 400
                     {
-                        attack1WindUp = 2;
+                        instance_create(600,512,objBoss1Reappear);
+                    }
+                    else
+                    {
+                        instance_create(200,512,objBoss1Reappear);
                     }
                 }
-            } 
-            if attack1WindUp = 2
-            {
-                with objBoss1Attack1Indicator {instance_destroy();}
-                hspeed = 1 * -image_xscale;   
-                vspeed = 18;
-                attack1WindUp = 3;
-            } 
-            if attack1WindUp = 4
-            {
-                attackTimer ++;
-                if attackTimer = 1
+                if timer = 5337
                 {
-                    scrScreenShake(14,10);
+                    audio_play_sound(sndBoss1Burst,11,false);
                 }
-                if attackTimer &gt;= 15
+                if timer = 5353
                 {
+                    if instance_exists(objBoss1Attack4Retract)
+                    {
+                        objBoss1Attack4Retract.fadeout = true;
+                    }
+                    instance_create(x,y,objBoss1Attack4CircleEffect);
+                    if instance_exists(objBoss1Attack4Circle)
+                    {
+                        objBoss1Attack4Circle.fadeout = true;
+                    }              
+                    repeat(48)
+                    {
+                        scrScreenShake(20,15);
+                        instance_create(400,150,objBoss1Attack4_2);
+                    }
+                    shieldTime = false;
                     attackComplete = true;
-                }                
-            }       
+                    state = MOVING;
+                    statePrevious = ATTACK4;
+                    attackPrevious = ATTACK4;
+                    timer = 0;
+                }
+            }
+            break;
         }
-        break;
-        case ATTACK2:
-        {
-            if attack2IntroDone = false and !instance_exists(objBoss1Attack2Intro1) 
-            {
-                instance_create(x-(20 * image_xscale),y-42,objBoss1Attack2Intro1);
-                audio_play_sound(sndBoss1Attack2Windup,10,false);
-            }
-            if attack2IntroDone = true
-            {
-                if instance_exists(objBoss1Attack2Intro1) {with objBoss1Attack2Intro1 {instance_destroy();}}
-                attackTimer += 1;
-                attack2Timer1 += 1;
-                if (attack2Timer1 mod 10) = 0
-                {
-                    instance_create(irandom_range(75,125),100,objBoss1Attack2);
-                    attack2Dir1 += 18.8;
-                    audio_play_sound(sndBoss1Attack2,10,false);
-                }
-                attack2Timer2 += 1;
-                if (attack2Timer2 mod 10) = 0
-                {
-                    instance_create(irandom_range(675,725),100,objBoss1Attack2_2);
-                    attack2Dir2 -= 18.8;
-                }
-                if place_meeting(x,y + 4, objBlock) and attackTimer &gt; 50 and attackTimer &lt; 550
-                {
-                    attack2JumpTimer += 1;
-                    if attack2JumpTimer = 50
-                    {
-                        event_user(0);
-                    }
-                }
-                if attackTimer &gt;= 600
-                {
-                    attackComplete = true;
-                    objBoss1Attack2Summon.destroy = true;
-                }  
-            }      
-        }
-        break;
-        case ATTACK3:
-        {
-            attackTimer += 1;
-            if attackTimer = 20
-            {
-                instance_create(64,448,objBoss1Attack3Warning);
-                instance_create(736,448,objBoss1Attack3Warning);
-            }
-            if attackTimer = 120
-            {
-                if attack3IntroDone = false
-                {
-                    instance_create(64,516,objBoss1Attack3Summon);
-                    instance_create(736,516,objBoss1Attack3Summon);
-                    for(var i = 0; i &lt; 5; i++)
-                    {
-                        instance_create(64,368 + (attack3SpawnGap * i),objBoss1Attack3Left);
-                        instance_create(736,368 + (attack3SpawnGap * i),objBoss1Attack3Right);
-                    }
-                    if instance_exists(objBoss1Attack3Warning)
-                    {
-                        objBoss1Attack3Warning.fadeOut = true;
-                    }
-                    attack3IntroDone = true;
-                }
-            }
-            if attackTimer = 135
-            {
-                audio_play_sound(sndBoss1Attack3Summon,10,false);
-            }
-            if attackTimer &gt;= 470
-            {
-                attackComplete = true;
-            }
-        }
-        break;
-        case ATTACK4:
-        {
-            attackTimer += 1;
-            if attackTimer = 1
-            {
-                if !instance_exists(objBoss1Attack4Circle)
-                {
-                    instance_create(400,150,objBoss1Attack4Circle);
-                }
-            }
-            if attackTimer mod 35 = 0 and attackTimer &lt;= 300
-            {
-                scrMakeStar(400,150,10,5,5,4,attack4Angle,4,false,objBoss1Attack4);
-                attack4Angle = random(360);
-                scrScreenShake(15,6);
-                instance_create(400,150,objBoss1Attack4CircleEffect)
-            }
-            if attackTimer = 450
-            {
-                objBoss1Attack4.retract = true;
-            }
-            /*if attackTimer = 800
-            {
-                if instance_exists(objBoss1Attack4Retract)
-                {
-                    with objBoss1Attack4Retract
-                    {
-                        instance_destroy();
-                    }
-                }
-                instance_create(x,y,objBoss1Attack4CircleEffect);
-                if instance_exists(objBoss1Attack4Circle)
-                {
-                    objBoss1Attack4Circle.fadeout = true;
-                }
-                repeat(64)
-                {
-                    scrScreenShake(20,5);
-                    instance_create(400,150,objBoss1Attack4_2);
-                }
-            }       
-            if attackTimer &gt;= 800
-            {
-                attackComplete = true;
-                attack4Angle = 0;
-                attackTimer = 0;
-            }*/
-        }
-        break;
-        case FILLERATTACK:
-        {
-            if timer = 4600
-            {
-                if !instance_exists(objBoss1Disappear)
-                {
-                    instance_create(x-16,y,objBoss1Disappear);
-                }
-            }           
-            switch timer
-            {
-                case 4678:
-                case 4689:
-                case 4712:
-                case 4722:
-                case 4748:
-                case 4759:
-                case 4783:
-                case 4794:
-                case 4815:
-                case 4826:
-                case 4850:
-                case 4861:
-                case 4884:
-                case 4895:
-                case 4930:
-                case 4953:
-                case 4964:
-                case 4986:
-                case 4997:
-                case 5021:
-                case 5032:
-                case 5055:
-                case 5066:
-                case 5090:
-                case 5100:
-                case 5125:
-                case 5136:
-                case 5158:
-                case 5170:
-                case 5193:
-                case 5204:
-                {
-                    scrScreenShake(20,6);
-                    fillerAttackCount += 1;   
-                    if fillerAttackCount = 1 {instance_create(400,150,objBoss1Attack4CircleEffect)} else if fillerAttackCount &gt;= 2 {fillerAttackCount = 0;}
-                    for(var i = 0; i &lt; 3; i++)
-                    {
-                        projectile = instance_create(400,150,objBoss1FillerAttack);
-                        projectile.image_angle = direction;
-                        projectile.vspeed = random_range(-4,-7);
-                        projectile.targetX = objPlayer.x - 32 + ( i * irandom_range(-96,122));
-                        projectile.targetY = 512;
-                        t = (-projectile.vspeed + sqrt(sqr(projectile.vspeed) + 2 * .3 * (560 - projectile.y)))/.3
-                        projectile.hspeed = (projectile.targetX - projectile.x) / t
-                        projectile.gravity = 0.25;
-                    }             
-                break;
-                }
-            }
-            if timer = 5315 and instance_exists(objBoss1Attack4Retract)
-            {
-                objBoss1Attack4Retract.burst = true;
-            }
-            if timer = 5325
-            {
-                if objPlayer.x &lt; 400
-                {
-                    instance_create(600,512,objBoss1Reappear);
-                }
-                else
-                {
-                    instance_create(200,512,objBoss1Reappear);
-                }
-            }
-            if timer = 5353
-            {
-                objBoss1Attack4Retract.fadeout = true;
-                instance_create(x,y,objBoss1Attack4CircleEffect);
-                if instance_exists(objBoss1Attack4Circle)
-                {
-                    objBoss1Attack4Circle.fadeout = true;
-                }
-                repeat(64)
-                {
-                    scrScreenShake(20,15);
-                    instance_create(400,150,objBoss1Attack4_2);
-                }
-                shieldTime = false;
-                attackComplete = true;
-                state = MOVING;
-                statePrevious = ATTACK4;
-                attackPrevious = ATTACK4;
-                timer = 0;
-            }
-        }
-        break;
     }
-}
-           
+     
+    if timer &gt;= 4320 and instance_exists(objBoss1Attack4)        
+    {
+        objBoss1Attack4.retract = true;
+    } 
+}     
 </string>
           </argument>
         </arguments>
@@ -618,7 +668,7 @@ if hspeed &lt; 0
     image_xscale = 1;
 }
 
-if sprite_index != sprBoss1Jump and jumpWindUp != 1 
+if sprite_index != sprBoss1Jump and jumpWindUp != 1 and state != DEAD
 {
     image_speed = 1/5;
 }
@@ -644,7 +694,7 @@ if sprite_index != sprBoss1Jump and jumpWindUp != 1
             <kind>1</kind>
             <string>///hp and shield control
 
-if hp &lt;= 62 and shieldTime = true
+if hp &lt;= 100 and shieldTime = true
 {
     shield = true;
 }
@@ -652,6 +702,116 @@ else if shieldTime = false
 {
     shield = false;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///boss is dead
+if instance_exists(objBoss1)
+{
+    if state = DEAD
+    {
+        soundPitch -= 0.0125;
+        audio_sound_pitch(musBoss1,soundPitch);
+        if image_speed &gt; 0
+        {
+            image_speed -= 0.0025;
+        }
+        else
+        {
+            image_speed = 0;
+        }
+        if soundPitch = 0
+        {
+            audio_stop_sound(musBoss1);
+            if !audio_is_playing(sndBossDeath)
+            {
+                audio_play_sound(sndBossDeath,10,false);
+            }
+            deadTimer += 1; 
+        }
+    }
+    if deadTimer &gt; 0
+    {
+        deadTimer += 1;
+    }
+    if deadTimer &gt;= 150 and deadTimer &lt; 300
+    {
+        if timer mod 20 = 0
+        {
+            if objBoss1.image_xscale = -1
+            {
+                instance_create(objBoss1.x + irandom_range(-48,48),(objBoss1.y - 48) + irandom_range(-32,32),objBossExplosion);
+            }
+            else
+            {
+                instance_create(objBoss1.x + irandom_range(-48,48),(objBoss1.y - 48) + irandom_range(-32,32),objBossExplosion);
+            }
+            scrScreenShake(20,irandom_range(4,10));
+        }
+    }
+    if deadTimer = 300
+    {
+        global.bossDead[0] = true;
+        scrSaveGame(false);
+        i = instance_create(objBoss1.x,objBoss1.y,objBossBigExplosion)
+        scrScreenShake(8,15);
+        i.image_xscale = 3;
+        i.image_yscale = 3;
+        repeat(24)
+        {
+            instance_create(objBoss1.x,objBoss1.y,objBoss1Remains);       
+        }
+        if expGiven = false
+        {
+            scrDropExp(18);
+            expGiven = true;            
+        }
+        if !instance_exists(objBoss1EndCutscene)
+        {
+            instance_create(0,0,objBoss1EndCutscene);
+        }
+        instance_destroy();
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///debug shit
+
 </string>
           </argument>
         </arguments>
@@ -674,7 +834,13 @@ else if shieldTime = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.grav == 1)  //normal
+            <string>if instance_exists(objPlayer)
+{
+    if objPlayer.x &lt; x {image_xscale = 1;}
+    else {image_xscale = -1;}
+}
+
+if (global.grav == 1)  //normal
 {
     if !place_free(x,y + vspeed)
     {
@@ -861,13 +1027,16 @@ if state = ATTACK2
 //scrDrawTextOutline(32,96,"hasjumped: " + string(hasJumped),c_white,c_black);
 //scrDrawTextOutline(32,112,"attackPrevious: " + string(attackPrevious),c_white,c_black);
 //scrDrawTextOutline(32,128,"timer: " + string(timer),c_white,c_black);
-scrDrawTextOutline(32,128,"attack1Sound: " + string(attack1Sound),c_white,c_black);
 
-if keyboard_check_pressed(vk_enter)
+//scrDrawTextOutline(32,128,"timer: " + string(timer),c_white,c_black);
+
+/*
+if keyboard_check_pressed(ord("K"))
 {
-    counter += 1;
-    show_debug_message(string(timer) + "   " + string(counter));    
+    hp = 0;
+    state = DEAD;
 }
+*/
 </string>
           </argument>
         </arguments>

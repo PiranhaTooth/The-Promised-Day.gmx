@@ -117,7 +117,6 @@
     <instance objName="objBlock" x="672" y="576" name="inst_75149746" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="704" y="544" name="inst_676B1101" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="736" y="512" name="inst_30A7BE0E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="736" y="480" name="inst_33B1F233" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="768" y="448" name="inst_0DA6766A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="736" y="416" name="inst_573262F9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="736" y="384" name="inst_F2DE807F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -208,6 +207,7 @@
     <instance objName="objBlock" x="768" y="-32" name="inst_F9BF6178" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objCloudCeiling" x="0" y="0" name="inst_DA3CBEE1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objSpikeLeft" x="256" y="544" name="inst_9D92972E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objBlock" x="768" y="480" name="inst_DBF0DD55" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bgGrasslandsDark" x="320" y="64" w="32" h="32" xo="64" yo="224" id="10018088" name="inst_2BC69D2D" depth="1000005" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -388,7 +388,7 @@
     <tile bgName="bgGrasslandsTileset" x="96" y="320" w="32" h="32" xo="32" yo="0" id="10018204" name="inst_252B7380" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="320" y="128" w="32" h="32" xo="64" yo="0" id="10018205" name="inst_9395E73E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="704" y="128" w="32" h="32" xo="64" yo="0" id="10018206" name="inst_303B0FC3" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgGrasslandsTileset" x="736" y="480" w="32" h="32" xo="64" yo="0" id="10018207" name="inst_DC476DFB" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bgGrasslandsTileset" x="736" y="512" w="32" h="32" xo="64" yo="0" id="10018207" name="inst_DC476DFB" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="704" y="544" w="32" h="32" xo="64" yo="0" id="10018208" name="inst_F75A9783" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="544" y="480" w="32" h="32" xo="64" yo="0" id="10018209" name="inst_BB483EEC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="320" y="512" w="32" h="32" xo="64" yo="0" id="10018210" name="inst_3DA44255" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -457,7 +457,6 @@
     <tile bgName="bgGrasslandsTileset" x="768" y="320" w="32" h="32" xo="96" yo="0" id="10018274" name="inst_78B60B2D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="768" y="288" w="32" h="32" xo="96" yo="0" id="10018275" name="inst_BF098508" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="736" y="384" w="32" h="32" xo="96" yo="0" id="10018276" name="inst_F871B730" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgGrasslandsTileset" x="736" y="512" w="32" h="32" xo="96" yo="0" id="10018277" name="inst_155AD113" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="768" y="448" w="32" h="32" xo="96" yo="0" id="10018278" name="inst_D6515B10" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="608" y="544" w="32" h="32" xo="160" yo="0" id="10018279" name="inst_CE0E9F90" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgGrasslandsTileset" x="608" y="512" w="32" h="32" xo="160" yo="0" id="10018280" name="inst_AB8D543D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

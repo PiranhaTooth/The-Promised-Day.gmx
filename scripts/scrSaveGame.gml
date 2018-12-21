@@ -46,18 +46,27 @@ if (savePosition)
         global.saveBossItem[i] = global.bossItem[i];
     }
 
-    for (var rm = 0; rm < 250; rm++)
+    for (var rm = 0; rm < 100; rm++)
     {
-        for (var idd = 0; idd < 10; idd++)
+        for (var idd = 0; idd < 5; idd++)
         {
             global.saveEnemyKilled[rm,idd] = global.enemyKilled[rm,idd]
         }
     }
     
+    for (var idd = 0; idd < 20; idd++)
+    {
+        global.saveDesertDoorOpened[idd] = global.desertDoorOpened[idd];
+    }
     global.savePlayerLevel = global.playerLevel;
     global.savePlayerExperience = global.playerExperience;
        
     global.saveGameClear = global.gameClear;
+    
+    for (var i = 0; i < 6; i++)
+    {
+        global.saveBossDead[i] = global.bossDead[i];
+    }    
 }
 
 //create a map for save data
@@ -75,6 +84,13 @@ ds_map_add(saveMap,"saveGrav",global.saveGrav);
 ds_map_add(saveMap,"savePlayerLevel",global.savePlayerLevel);
 ds_map_add(saveMap,"savePlayerExperience",global.savePlayerExperience);
 
+ds_map_add(saveMap,"boss1Spawned",global.boss1Spawned);
+
+for (var i = 0; i < 6; i++)
+{
+    ds_map_add(saveMap,"saveBossDead[" + string(i) + "]",global.saveBossDead[i]);
+}
+
 for (var i = 0; i < global.secretItemTotal; i++)
 {
     ds_map_add(saveMap,"saveSecretItem["+string(i)+"]",global.saveSecretItem[i]);
@@ -85,13 +101,18 @@ for (var i = 0; i < global.bossItemTotal; i++)
     ds_map_add(saveMap,"saveBossItem["+string(i)+"]",global.saveBossItem[i]);
 }
 
-for (var rm = 0; rm < 250; rm++)
+for (var rm = 0; rm < 100; rm++)
 {
-    for (var idd = 0; idd < 10; idd++)
+    for (var idd = 0; idd < 5; idd++)
     {
-        ds_map_add(saveMap,"saveEnemyKilled[" + string(rm) + "," + string(idd) + "]",global.saveEnemyKilled[rm,idd]);
+        ds_map_add(saveMap,"saveEnemyKilled["+string(rm)+","+string(idd)+"]",global.saveEnemyKilled[rm,idd]);
     }
 }
+
+    for (var idd = 0; idd < 20; idd++)
+    {
+        ds_map_add(saveMap,"saveDesertDoorOpened["+string(idd)+"]",global.saveDesertDoorOpened[idd]);
+    }
 
 ds_map_add(saveMap,"saveGameClear",global.saveGameClear);
 
@@ -112,6 +133,9 @@ else    //use text file
     file_text_write_string(f,base64_encode(ds_map_write(saveMap)));
     
     file_text_close(f);
+    ini_open("ini_test")
+    ini_write_string("Save","Variables",ds_map_write(saveMap));
+    ini_close();
 }
 
 //destroy the map

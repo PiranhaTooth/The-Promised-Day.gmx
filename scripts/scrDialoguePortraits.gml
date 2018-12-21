@@ -17,13 +17,21 @@ if (npc != 2 and pressed = true) or (npc = 2)
             {
                 speakerObject = objKid;
             }
-        }break;
+        }
+        break;
         
         case "Vinilo":
         {
             sprite = sprViniloPortrait;
             speakerObject = objVinilo;
-        }break;
+        }
+        break;
+        
+        case "Sam":
+        {
+            sprite = sprSamPortrait;
+            speakerObject = objSam;
+        }
     }
 }
 

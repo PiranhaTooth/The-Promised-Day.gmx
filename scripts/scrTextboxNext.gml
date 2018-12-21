@@ -6,3 +6,4 @@ speakerCurrent ++;
 characters = 0;
 messageDraw = "";
 actionComplete = false;
+hold = false;

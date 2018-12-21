@@ -10,6 +10,7 @@
     <sounds name="sfx">
       <sound>sound\sndJump</sound>
       <sound>sound\sndDJump</sound>
+      <sound>sound\sndLand</sound>
       <sound>sound\sndWallJump</sound>
       <sound>sound\sndShoot</sound>
       <sound>sound\sndDeath</sound>
@@ -21,6 +22,11 @@
       <sound>sound\sndSpikeTrap</sound>
       <sound>sound\sndDialogue</sound>
       <sound>sound\sndLevelUp</sound>
+      <sound>sound\sndBossDeath</sound>
+      <sound>sound\sndExpGain</sound>
+      <sound>sound\sndFireLit</sound>
+      <sound>sound\sndDesertDoorOpening</sound>
+      <sound>sound\sndDart</sound>
       <sounds name="Boss1">
         <sound>sound\sndBoss1Attack1</sound>
         <sound>sound\sndBoss1Land</sound>
@@ -33,6 +39,15 @@
         <sound>sound\sndBoss1Attack2Windup2</sound>
         <sound>sound\sndBoss1Attack2</sound>
         <sound>sound\sndBoss1Attack3Summon</sound>
+        <sound>sound\sndBoss1Attack3</sound>
+        <sound>sound\sndBoss1Attack3Pop</sound>
+        <sound>sound\sndBoss1Attack4</sound>
+        <sound>sound\sndBoss1FillerAttack</sound>
+        <sound>sound\sndBoss1Burst</sound>
+      </sounds>
+      <sounds name="Boss2">
+        <sound>sound\sndBoss2RockSmash</sound>
+        <sound>sound\sndBoss2Attack1Filler</sound>
       </sounds>
     </sounds>
     <sounds name="music">
@@ -47,6 +62,11 @@
       <sound>sound\musBeachTown</sound>
       <sound>sound\musGrasslands</sound>
       <sound>sound\musBoss1</sound>
+      <sound>sound\musDesert</sound>
+      <sound>sound\musDesertUnderground</sound>
+      <sound>sound\musDesertTown</sound>
+      <sound>sound\musWastelands</sound>
+      <sound>sound\musBoss2</sound>
     </sounds>
     <sounds name="Enemies">
       <sounds name="slime">
@@ -59,6 +79,7 @@
   </sounds>
   <sprites name="sprites">
     <sprites name="world">
+      <sprite>sprites\sprTitle</sprite>
       <sprite>sprites\sprCamera</sprite>
       <sprite>sprites\sprPlayMusic</sprite>
       <sprite>sprites\sprPlayerKiller</sprite>
@@ -82,6 +103,8 @@
     <sprites name="blocks">
       <sprite>sprites\sprBlockMask</sprite>
       <sprite>sprites\sprMiniBlockMask</sprite>
+      <sprite>sprites\sprSaveBlocker</sprite>
+      <sprite>sprites\sprDesertBlock</sprite>
       <sprite>sprites\sprSlipBlockMask</sprite>
       <sprite>sprites\sprKillerBlock</sprite>
       <sprite>sprites\sprBlock</sprite>
@@ -89,7 +112,6 @@
       <sprite>sprites\sprSlideBlock</sprite>
       <sprite>sprites\sprSlideBlockR</sprite>
       <sprite>sprites\sprSlideBlockL</sprite>
-      <sprite>sprites\sprSaveBlocker</sprite>
     </sprites>
     <sprites name="slopes">
       <sprite>sprites\sprSlopeBlock</sprite>
@@ -101,25 +123,61 @@
     <sprites name="platforms">
       <sprite>sprites\sprPlatform</sprite>
       <sprite>sprites\sprMovingPlatform</sprite>
+      <sprite>sprites\sprGrasslandsPlatform</sprite>
+      <sprite>sprites\sprDesertCavePlatform</sprite>
+      <sprite>sprites\sprDesertPlatform</sprite>
     </sprites>
     <sprites name="killers">
+      <sprites name="Normal">
+        <sprite>sprites\sprSpikeUp</sprite>
+        <sprite>sprites\sprSpikeRight</sprite>
+        <sprite>sprites\sprSpikeLeft</sprite>
+        <sprite>sprites\sprSpikeDown</sprite>
+        <sprite>sprites\sprShortSpikeUp</sprite>
+        <sprite>sprites\sprShortSpikeRight</sprite>
+        <sprite>sprites\sprShortSpikeLeft</sprite>
+        <sprite>sprites\sprShortSpikeDown</sprite>
+      </sprites>
+      <sprites name="Desert">
+        <sprite>sprites\sprDesertSpikeUp</sprite>
+        <sprite>sprites\sprDesertSpikeRight</sprite>
+        <sprite>sprites\sprDesertSpikeLeft</sprite>
+        <sprite>sprites\sprDesertSpikeDown</sprite>
+        <sprite>sprites\sprDartShooterLeft</sprite>
+        <sprite>sprites\sprDartLeft</sprite>
+        <sprite>sprites\sprDartShooterRight</sprite>
+        <sprite>sprites\sprDartRight</sprite>
+        <sprite>sprites\sprDartShooterUp</sprite>
+        <sprite>sprites\sprDartUp</sprite>
+        <sprite>sprites\sprDartShooterDown</sprite>
+        <sprite>sprites\sprDartDown</sprite>
+      </sprites>
+      <sprites name="Wasteland">
+        <sprite>sprites\sprWastelandSpikeUp</sprite>
+        <sprite>sprites\sprWastelandSpikeRight</sprite>
+        <sprite>sprites\sprWastelandSpikeLeft</sprite>
+        <sprite>sprites\sprWastelandSpikeDown</sprite>
+        <sprite>sprites\sprWastelandShortSpikeUp</sprite>
+        <sprite>sprites\sprWastelandShortSpikeRight</sprite>
+        <sprite>sprites\sprWastelandShortSpikeLeft</sprite>
+        <sprite>sprites\sprWastelandShortSpikeDown</sprite>
+      </sprites>
+      <sprite>sprites\sprMiniUp</sprite>
+      <sprite>sprites\sprMiniRight</sprite>
+      <sprite>sprites\sprMiniLeft</sprite>
+      <sprite>sprites\sprMiniDown</sprite>
+      <sprite>sprites\sprRotatingSpike</sprite>
+      <sprite>sprites\sprCherry</sprite>
+      <sprite>sprites\sprMiku</sprite>
+      <sprite>sprites\sprCherryWhite</sprite>
+      <sprite>sprites\sprite154</sprite>
+      <sprite>sprites\sprite151</sprite>
       <sprites name="spikes">
         <sprite>sprites\sprBeachSpikeUp</sprite>
         <sprite>sprites\sprBeachSpikeRight</sprite>
         <sprite>sprites\sprBeachSpikeLeft</sprite>
         <sprite>sprites\sprBeachSpikeDown</sprite>
       </sprites>
-      <sprite>sprites\sprSpikeUp</sprite>
-      <sprite>sprites\sprSpikeRight</sprite>
-      <sprite>sprites\sprSpikeLeft</sprite>
-      <sprite>sprites\sprSpikeDown</sprite>
-      <sprite>sprites\sprMiniUp</sprite>
-      <sprite>sprites\sprMiniRight</sprite>
-      <sprite>sprites\sprMiniLeft</sprite>
-      <sprite>sprites\sprMiniDown</sprite>
-      <sprite>sprites\sprCherry</sprite>
-      <sprite>sprites\sprMiku</sprite>
-      <sprite>sprites\sprCherryWhite</sprite>
     </sprites>
     <sprites name="misc">
       <sprite>sprites\sprWater</sprite>
@@ -129,7 +187,6 @@
       <sprite>sprites\sprSign</sprite>
       <sprite>sprites\sprGravityUp</sprite>
       <sprite>sprites\sprGravityDown</sprite>
-      <sprite>sprites\sprLevelUp</sprite>
     </sprites>
     <sprites name="triggers">
       <sprite>sprites\sprTriggerMask</sprite>
@@ -159,7 +216,7 @@
       <sprite>sprites\spr_rain_test_block</sprite>
       <sprite>sprites\spr_texture_rain</sprite>
     </sprites>
-    <sprites name="cinematic">
+    <sprites name="cinematic / environmental">
       <sprites name="title">
         <sprite>sprites\sprTileBackgroundTop</sprite>
         <sprite>sprites\sprTileBackgroundBottom</sprite>
@@ -178,6 +235,12 @@
       <sprite>sprites\sprWhiteBorder</sprite>
       <sprite>sprites\sprWhiteRectangle</sprite>
       <sprite>sprites\sprBackgroundRed</sprite>
+      <sprite>sprites\sprGlow</sprite>
+      <sprite>sprites\sprTorch</sprite>
+      <sprite>sprites\sprTorchUp</sprite>
+      <sprite>sprites\sprTorchHolder</sprite>
+      <sprite>sprites\sprCaveFinishLight</sprite>
+      <sprite>sprites\sprFloatingCloud</sprite>
     </sprites>
     <sprites name="backgrounds">
       <sprite>sprites\sprBeachBackground</sprite>
@@ -185,15 +248,32 @@
       <sprite>sprites\sprSun</sprite>
       <sprite>sprites\sprGrasslandsBG</sprite>
     </sprites>
+    <sprites name="Non-talkable NPC's">
+      <sprites name="Child 1">
+        <sprite>sprites\sprChild1Idle</sprite>
+        <sprite>sprites\sprChild1Running</sprite>
+        <sprite>sprites\sprChild1Jump</sprite>
+        <sprite>sprites\sprChild1Fall</sprite>
+      </sprites>
+      <sprites name="Child 2">
+        <sprite>sprites\sprChild2Idle</sprite>
+        <sprite>sprites\sprChild2Running</sprite>
+        <sprite>sprites\sprChild2Jump</sprite>
+        <sprite>sprites\sprChild2Fall</sprite>
+      </sprites>
+    </sprites>
     <sprites name="npcs">
+      <sprite>sprites\sprSpeechBubble</sprite>
+      <sprite>sprites\sprKidPortrait</sprite>
       <sprites name="Vinilo">
         <sprite>sprites\sprViniloPortrait</sprite>
         <sprite>sprites\sprViniloIdle</sprite>
         <sprite>sprites\sprViniloRunning</sprite>
       </sprites>
-      <sprite>sprites\sprKidPortrait</sprite>
-      <sprite>sprites\sprBizzle</sprite>
-      <sprite>sprites\sprSam</sprite>
+      <sprites name="Sam">
+        <sprite>sprites\sprSamPortrait</sprite>
+        <sprite>sprites\sprSamIdle</sprite>
+      </sprites>
     </sprites>
     <sprites name="Enemies">
       <sprites name="Slime">
@@ -203,10 +283,17 @@
         <sprite>sprites\sprSlimeball</sprite>
       </sprites>
     </sprites>
-    <sprites name="Healthbar">
+    <sprites name="Healthbar / EXP bar">
       <sprite>sprites\sprHealthbarInner</sprite>
       <sprite>sprites\sprHealthbarBorder</sprite>
       <sprite>sprites\sprHealthbarBg</sprite>
+      <sprite>sprites\sprExpUI</sprite>
+      <sprite>sprites\sprExpProgress</sprite>
+      <sprite>sprites\sprExpProgressBlendMode</sprite>
+      <sprite>sprites\sprExpProgressOutline</sprite>
+      <sprite>sprites\sprExpProgressOutlineRight</sprite>
+      <sprite>sprites\sprExpOrb</sprite>
+      <sprite>sprites\sprLevelUp</sprite>
     </sprites>
     <sprites name="Random shit">
       <sprite>sprites\sprite102</sprite>
@@ -217,7 +304,18 @@
       <sprite>sprites\sprite97</sprite>
       <sprite>sprites\WHEEZE</sprite>
       <sprite>sprites\sprite99</sprite>
+      <sprite>sprites\keen_sprites</sprite>
     </sprites>
+    <sprites name="Transition Names">
+      <sprite>sprites\sprBeachfrontPlains</sprite>
+      <sprite>sprites\sprBeachTown</sprite>
+      <sprite>sprites\sprRoute224</sprite>
+      <sprite>sprites\sprEnRoute</sprite>
+      <sprite>sprites\sprDesertTown</sprite>
+      <sprite>sprites\sprSunhunterRuins</sprite>
+    </sprites>
+    <sprite>sprites\sprBossShield</sprite>
+    <sprite>sprites\sprBossExplosion</sprite>
     <sprites name="Boss1">
       <sprite>sprites\sprSlimeStatue</sprite>
       <sprite>sprites\sprBoss1</sprite>
@@ -226,6 +324,7 @@
       <sprite>sprites\sprBoss1JumpHitbox</sprite>
       <sprite>sprites\sprBoss1Attack1Indicator</sprite>
       <sprite>sprites\sprBoss1Bullet</sprite>
+      <sprite>sprites\sprBoss1Remains</sprite>
       <sprites name="Attack Spawns / Summons">
         <sprite>sprites\sprBoss1Spawn</sprite>
         <sprite>sprites\sprBoss1Attack2Intro1</sprite>
@@ -238,27 +337,66 @@
         <sprite>sprites\sprBoss1Disappear</sprite>
       </sprites>
     </sprites>
-    <sprite>sprites\sprBossShield</sprite>
-    <sprite>sprites\sprTest</sprite>
-    <sprite>sprites\sprite125</sprite>
-    <sprite>sprites\sprite129</sprite>
+    <sprites name="Boss2">
+      <sprite>sprites\sprite193</sprite>
+      <sprite>sprites\sprBoss2Idle</sprite>
+      <sprite>sprites\sprBoss2IdleHitbox</sprite>
+      <sprite>sprites\sprBoss2Cast</sprite>
+      <sprite>sprites\sprBoss2CastHitbox</sprite>
+      <sprite>sprites\sprBoss2Collapse</sprite>
+      <sprite>sprites\sprBoss2CollapseHitbox</sprite>
+      <sprite>sprites\sprite195</sprite>
+      <sprite>sprites\sprBoss2Projectile1</sprite>
+      <sprite>sprites\sprBoss2Projectile2</sprite>
+      <sprite>sprites\sprBoss2Projectile3</sprite>
+      <sprite>sprites\sprBoss2Projectile4</sprite>
+      <sprite>sprites\sprBoss2Particle1</sprite>
+      <sprite>sprites\sprBoss2Particle2</sprite>
+      <sprite>sprites\sprBoss2Particle3</sprite>
+      <sprite>sprites\sprBoss2Particle4</sprite>
+      <sprite>sprites\sprBoss2ProjectileOld</sprite>
+    </sprites>
     <sprite>sprites\bullet_sprite_sheet</sprite>
-    <sprite>sprites\nike</sprite>
   </sprites>
   <backgrounds name="background">
+    <background>background\background48</background>
+    <background>background\bgTitleScreen</background>
     <background>background\bgGrasslands</background>
     <background>background\bgGrasslandsTileset</background>
     <background>background\bgGrasslandsDark</background>
+    <background>background\bgDesert</background>
+    <background>background\bgDesertUnder</background>
+    <background>background\bgDesertUnderDeep</background>
+    <background>background\bgDesertTileset</background>
+    <background>background\bgDesertTileset16</background>
+    <background>background\bgWastelands</background>
+    <background>background\bgWastelandsUp</background>
+    <background>background\bgDesertUnderTileset</background>
+    <background>background\background46</background>
+    <background>background\bgWastelandTiles</background>
+    <background>background\bgWastelandTilesDark</background>
+    <background>background\bTreeHouseTiles</background>
+    <background>background\bunch_of_tiles</background>
+    <background>background\bgWastelandTiles16</background>
+    <background>background\bgSkyBelow</background>
+    <background>background\bgSky</background>
+    <background>background\bCloudTiles</background>
     <background>background\bAllTiles</background>
     <background>background\bMegaman</background>
     <background>background\bJumpThrough</background>
-    <background>background\bTilesBeach</background>
+    <background>background\bTilesDesert</background>
     <background>background\bTree</background>
     <background>background\bStars</background>
     <backgrounds name="houses">
       <background>background\bHouse1</background>
       <background>background\bHouse2</background>
       <background>background\bHouse1Inside</background>
+      <background>background\bDesertHouse1</background>
+      <background>background\bDesertHouse2</background>
+      <background>background\bDesertHouse3</background>
+      <background>background\bDesertHouse1Inside</background>
+      <background>background\bDesertHouse2Inside</background>
+      <background>background\bDesertHouse3Inside</background>
       <background>background\background24</background>
     </backgrounds>
     <background>background\background11</background>
@@ -278,6 +416,9 @@
       <background>background\bWhiteFlowers3</background>
       <background>background\bBush</background>
     </backgrounds>
+    <background>background\give_me_those_spikes</background>
+    <background>background\background52</background>
+    <background>background\bgTreeHouseLeaves</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -288,6 +429,9 @@
       <script>scripts\scrSetPlayerMask.gml</script>
       <script>scripts\scrKillPlayer.gml</script>
       <script>scripts\scrFlipGrav.gml</script>
+    </scripts>
+    <scripts name="AI Scripts">
+      <script>scripts\scrAIJump.gml</script>
     </scripts>
     <scripts name="world">
       <script>scripts\scrInitializeGlobals.gml</script>
@@ -318,6 +462,11 @@
       <script>scripts\scrDrawTextOutline.gml</script>
       <script>scripts\scrScreenShake.gml</script>
       <script>scripts\scrWave.gml</script>
+      <script>scripts\scrDropExp.gml</script>
+      <script>scripts\scrDesertDoorOpen.gml</script>
+      <script>scripts\scrDesertBlockDestroy.gml</script>
+      <script>scripts\scrSelect.gml</script>
+      <script>scripts\scrSpikeShift.gml</script>
     </scripts>
     <scripts name="rain">
       <script>scripts\rain_set_drop_count.gml</script>
@@ -347,12 +496,14 @@
     <font>fonts\fDefault24</font>
     <font>fonts\fDefault18</font>
     <font>fonts\fDefault12</font>
+    <font>fonts\fntTransition</font>
     <font>fonts\fntMenu</font>
     <font>fonts\fntDialogue</font>
   </fonts>
   <objects name="objects">
     <objects name="world">
       <object>objects\objWorld</object>
+      <object>objects\objTitle</object>
       <object>objects\objDifficultySelect</object>
       <object>objects\objOptionsMenu</object>
       <object>objects\objKeyboardControlsMenu</object>
@@ -361,6 +512,11 @@
       <object>objects\objSmoothCamera</object>
       <object>objects\objPlayMusic</object>
       <object>objects\objSelector</object>
+      <object>objects\objExpController</object>
+      <object>objects\objExpOrb</object>
+      <object>objects\objLevelUp</object>
+      <object>objects\objDesertMusic</object>
+      <object>objects\UNDER_CONSTRUCTION</object>
     </objects>
     <objects name="player">
       <object>objects\objPlayerStart</object>
@@ -372,7 +528,10 @@
     </objects>
     <objects name="blocks">
       <object>objects\objBlock</object>
+      <object>objects\objOtherBlock</object>
       <object>objects\objMiniBlock</object>
+      <object>objects\objSaveBlocker</object>
+      <object>objects\objDesertBlock</object>
       <object>objects\objSlipBlock</object>
       <object>objects\objBlockInvis</object>
       <object>objects\objBlockFake</object>
@@ -380,7 +539,6 @@
       <object>objects\objSlideBlockL</object>
       <object>objects\objSlideBlockR</object>
       <object>objects\objBossBlock</object>
-      <object>objects\objSaveBlocker</object>
     </objects>
     <objects name="slopes">
       <object>objects\objSlope</object>
@@ -397,21 +555,52 @@
       <object>objects\objBlockFall</object>
     </objects>
     <objects name="killers">
-      <object>objects\objPlayerKiller</object>
-      <object>objects\objSpikeUp</object>
-      <object>objects\objSpikeRight</object>
-      <object>objects\objSpikeLeft</object>
-      <object>objects\objSpikeDown</object>
-      <object>objects\objMiniUp</object>
-      <object>objects\objMiniRight</object>
-      <object>objects\objMiniLeft</object>
-      <object>objects\objMiniDown</object>
+      <objects name="normal">
+        <object>objects\objSpikeUp</object>
+        <object>objects\objSpikeRight</object>
+        <object>objects\objSpikeLeft</object>
+        <object>objects\objSpikeDown</object>
+        <object>objects\objShortSpikeUp</object>
+        <object>objects\objShortSpikeRight</object>
+        <object>objects\objShortSpikeLeft</object>
+        <object>objects\objShortSpikeDown</object>
+        <object>objects\objMiniUp</object>
+        <object>objects\objMiniRight</object>
+        <object>objects\objMiniLeft</object>
+        <object>objects\objMiniDown</object>
+      </objects>
+      <objects name="Desert">
+        <object>objects\objDesertSpikeUp</object>
+        <object>objects\objDesertSpikeRight</object>
+        <object>objects\objDesertSpikeLeft</object>
+        <object>objects\objDesertSpikeDown</object>
+        <object>objects\objDartShooterLeft</object>
+        <object>objects\objDartLeft</object>
+        <object>objects\objDartShooterRight</object>
+        <object>objects\objDartRight</object>
+        <object>objects\objDartShooterDown</object>
+        <object>objects\objDartUp</object>
+        <object>objects\objDartShooterUp</object>
+        <object>objects\objDartDown</object>
+      </objects>
+      <objects name="Wasteland">
+        <object>objects\objWastelandSpikeUp</object>
+        <object>objects\objWastelandSpikeRight</object>
+        <object>objects\objWastelandSpikeLeft</object>
+        <object>objects\objWastelandSpikeDown</object>
+        <object>objects\objWastelandShortSpikeUp</object>
+        <object>objects\objWastelandShortSpikeRight</object>
+        <object>objects\objWastelandShortSpikeLeft</object>
+        <object>objects\objWastelandShortSpikeDown</object>
+      </objects>
+      <object>objects\objRotatingSpike</object>
       <object>objects\objCherry</object>
       <object>objects\objCherryBounce</object>
       <object>objects\objCherryBounceRandom</object>
       <object>objects\objCherryBounceLat</object>
       <object>objects\objCherryBounceVert</object>
       <object>objects\objKillerBlock</object>
+      <object>objects\objPlayerKiller</object>
       <objects name="bosses">
         <object>objects\objCherryEnemyTest</object>
         <object>objects\objCherryBossTest</object>
@@ -443,7 +632,6 @@
       <object>objects\objSign</object>
       <object>objects\objGravityUp</object>
       <object>objects\objGravityDown</object>
-      <object>objects\objLevelUp</object>
     </objects>
     <objects name="saves">
       <object>objects\objSaveMedium</object>
@@ -456,7 +644,9 @@
     <objects name="warps / transitions">
       <object>objects\objWarpStart</object>
       <object>objects\objRoomChanger</object>
+      <object>objects\objHouseTransition</object>
       <object>objects\objTownTransition</object>
+      <object>objects\objTownTransitionController</object>
       <object>objects\objWarp</object>
       <object>objects\objWarpNext</object>
       <object>objects\objWarpAutosaveNext</object>
@@ -478,7 +668,7 @@
       <object>objects\obj_rain_test_block</object>
       <object>objects\obj_rain_parent_collision</object>
     </objects>
-    <objects name="cinematic">
+    <objects name="cinematic / environmental">
       <objects name="Title Cinematic">
         <object>objects\objKidCinematic</object>
         <object>objects\objMovingTileTop</object>
@@ -500,6 +690,15 @@
       <object>objects\objCinematicParticles</object>
       <object>objects\objWhiteFadeout</object>
       <object>objects\objScreenShake</object>
+      <object>objects\objGrassDesertMusic</object>
+      <object>objects\objSandstorm</object>
+      <object>objects\objCaveLighting</object>
+      <object>objects\objGlow</object>
+      <object>objects\objTorch</object>
+      <object>objects\objTorchHolder</object>
+      <object>objects\objTorchHolder2</object>
+      <object>objects\objCaveFinishLight</object>
+      <object>objects\objFloatingCloud</object>
     </objects>
     <objects name="backgrounds">
       <object>objects\objBackgroundSun</object>
@@ -509,9 +708,11 @@
     </objects>
     <objects name="dialogue">
       <object>objects\objTextbox</object>
+      <object>objects\objSpeechBubble</object>
       <objects name="npcs">
         <object>objects\objKid</object>
         <object>objects\objVinilo</object>
+        <object>objects\objSam</object>
       </objects>
       <objects name="actions">
         <object>objects\objR1BeachController1</object>
@@ -519,7 +720,15 @@
         <object>objects\objRBossGrasslandsController1</object>
         <object>objects\objRBossGrasslandsController2</object>
         <object>objects\objRBossGrasslandsController3</object>
+        <object>objects\objSkipBossCutscenes</object>
+        <object>objects\objEnableBossCutscenes</object>
+        <object>objects\objRBoss1EndCutsceneController</object>
+        <object>objects\objR3GrasslandsTurnBack</object>
       </objects>
+    </objects>
+    <objects name="Non-talkable NPC's">
+      <object>objects\objAITest</object>
+      <object>objects\OLD_CHILD_OBJECT</object>
     </objects>
     <objects name="Enemies / HP bar">
       <object>objects\objHP</object>
@@ -529,42 +738,74 @@
         <object>objects\objSlimeball2</object>
       </objects>
     </objects>
-    <objects name="Boss1">
-      <object>objects\objSlimeStatue</object>
-      <object>objects\objBoss1Intro</object>
-      <object>objects\objBoss1Spawn</object>
-      <object>objects\objBoss1</object>
-      <object>objects\objBoss1Hitbox</object>
-      <objects name="Boss1 Attacks">
-        <object>objects\objBoss1Attack1IndicatorEffect</object>
-        <object>objects\objBoss1Attack1Indicator</object>
-        <object>objects\objBoss1Attack1</object>
-        <object>objects\objBoss1Attack1_2</object>
-        <object>objects\objBoss1Attack2Intro1</object>
-        <object>objects\objBoss1Attack2Intro2</object>
-        <object>objects\objBoss1Attack2Intro3</object>
-        <object>objects\objBoss1Attack2Intro4</object>
-        <object>objects\objBoss1Attack2Summon</object>
-        <object>objects\objBoss1Attack2</object>
-        <object>objects\objBoss1Attack2_2</object>
-        <object>objects\objBoss1Attack3Summon</object>
-        <object>objects\objBoss1Attack3Warning</object>
-        <object>objects\objBoss1Attack3Left</object>
-        <object>objects\objBoss1Attack3Right</object>
-        <object>objects\objBoss1Attack3Circle</object>
-        <object>objects\objBoss1Attack4</object>
-        <object>objects\objBoss1Attack4_2</object>
-        <object>objects\objBoss1Attack4Retract</object>
-        <object>objects\objBoss1Attack4Circle</object>
-        <object>objects\objBoss1Attack4CircleEffect</object>
-        <object>objects\objBoss1Disappear</object>
-        <object>objects\objBoss1FillerAttack</object>
-        <object>objects\objBoss1Reappear</object>
+    <objects name="Bosses">
+      <object>objects\objBossExplosion</object>
+      <object>objects\objBossBigExplosion</object>
+      <object>objects\objBossShield</object>
+      <objects name="Boss1">
+        <object>objects\objSlimeStatue</object>
+        <object>objects\objBoss1Spawner</object>
+        <object>objects\objBoss1Intro</object>
+        <object>objects\objBoss1Spawn</object>
+        <object>objects\objBoss1</object>
+        <object>objects\objBoss1Hitbox</object>
+        <object>objects\objBoss1Remains</object>
+        <object>objects\objBoss1EndCutscene</object>
+        <object>objects\objBoss1Debug</object>
+        <objects name="Boss1 Attacks">
+          <object>objects\objBoss1Attack1IndicatorEffect</object>
+          <object>objects\objBoss1Attack1Indicator</object>
+          <object>objects\objBoss1Attack1</object>
+          <object>objects\objBoss1Attack1_2</object>
+          <object>objects\objBoss1Attack2Intro1</object>
+          <object>objects\objBoss1Attack2Intro2</object>
+          <object>objects\objBoss1Attack2Intro3</object>
+          <object>objects\objBoss1Attack2Intro4</object>
+          <object>objects\objBoss1Attack2Summon</object>
+          <object>objects\objBoss1Attack2</object>
+          <object>objects\objBoss1Attack2_2</object>
+          <object>objects\objBoss1Attack3Summon</object>
+          <object>objects\objBoss1Attack3Warning</object>
+          <object>objects\objBoss1Attack3Left</object>
+          <object>objects\objBoss1Attack3Right</object>
+          <object>objects\objBoss1Attack3Circle</object>
+          <object>objects\objBoss1Attack3CircleEffect</object>
+          <object>objects\objBoss1Attack4Intro1</object>
+          <object>objects\objBoss1Attack4Intro2</object>
+          <object>objects\objBoss1Attack4Orb1</object>
+          <object>objects\objBoss1Attack4Orb2</object>
+          <object>objects\objBoss1Attack4Circle</object>
+          <object>objects\objBoss1Attack4CircleEffect</object>
+          <object>objects\objBoss1Attack4</object>
+          <object>objects\objBoss1Attack4_2</object>
+          <object>objects\objBoss1Attack4Retract</object>
+          <object>objects\objBoss1Disappear</object>
+          <object>objects\objBoss1FillerAttack</object>
+          <object>objects\objBoss1Reappear</object>
+        </objects>
+      </objects>
+      <objects name="Boss2">
+        <object>objects\objBoss2</object>
+        <object>objects\objBoss2Hitbox</object>
+        <object>objects\objBoss2Attack1Filler</object>
+        <object>objects\objBoss2Attack1Projectile</object>
+        <object>objects\objBoss2AimedTripleBurst</object>
+        <object>objects\objBoss2Attack3Falling</object>
+        <object>objects\objBoss2Attack3Shrapnel</object>
+        <object>objects\objBoss2Attack4Collide</object>
+        <object>objects\objBoss2Attack4Burst</object>
+        <object>objects\objBoss2Attack5BlastProjectile</object>
+        <object>objects\objBoss2Attack5HomingProjectile</object>
+        <object>objects\objBoss2Attack6Spawner</object>
+        <object>objects\objBoss2Attack6Projectile</object>
+        <object>objects\objBoss2Start</object>
+        <object>objects\objBoss2Particle</object>
+        <object>objects\objBoss2Warning</object>
+        <object>objects\objBoss2Disappear</object>
+        <object>objects\objBoss2Reappear</object>
       </objects>
     </objects>
-    <object>objects\mes</object>
-    <object>objects\objBoss1Debug</object>
-    <object>objects\objTest</object>
+    <object>objects\objBlendModeTest</object>
   </objects>
   <rooms name="rooms">
     <rooms name="init">
@@ -574,8 +815,13 @@
       <room>rooms\rDifficultySelect</room>
       <room>rooms\rMenuCinematic</room>
     </rooms>
-    <rooms name="playable">
+    <rooms name="cutscenes">
       <room>rooms\rOpeningCinematics</room>
+      <room>rooms\rTransitionRoom</room>
+      <room>rooms\rBossGrasslandsCutscene1</room>
+      <room>rooms\rBoss1EndCutscene</room>
+    </rooms>
+    <rooms name="playable">
       <rooms name="Beach">
         <room>rooms\rBeachFront</room>
         <room>rooms\r1Beach</room>
@@ -583,7 +829,9 @@
         <room>rooms\r3Beach</room>
         <room>rooms\r4Beach</room>
       </rooms>
-      <room>rooms\rBeachTown</room>
+      <rooms name="Beach Town">
+        <room>rooms\rBeachTown</room>
+      </rooms>
       <rooms name="Grasslands">
         <room>rooms\r1Grasslands</room>
         <room>rooms\r2Grasslands</room>
@@ -600,8 +848,52 @@
         <room>rooms\rBossGrasslands</room>
         <room>rooms\rGrasslandsTemplate</room>
       </rooms>
-      <rooms name="cutscenes">
-        <room>rooms\rBossGrasslandsCutscene1</room>
+      <room>rooms\rGrassDesertTransition</room>
+      <room>rooms\rGrassDesertTransition2</room>
+      <room>rooms\rGrassDesertTransition3</room>
+      <rooms name="Desert">
+        <room>rooms\rDesert1</room>
+        <room>rooms\rDesert2</room>
+        <room>rooms\rDesert3</room>
+        <room>rooms\rDesert4</room>
+        <room>rooms\rDesert5</room>
+        <room>rooms\rDesert6</room>
+        <room>rooms\rDesert7</room>
+        <room>rooms\rDesert8</room>
+        <room>rooms\rDesert9</room>
+        <room>rooms\rDesert10</room>
+        <room>rooms\rDesert11</room>
+        <room>rooms\rDesert12</room>
+        <room>rooms\rDesert13</room>
+        <room>rooms\rDesert14</room>
+        <room>rooms\rDesertTemplate</room>
+      </rooms>
+      <rooms name="Desert Town">
+        <room>rooms\rDesertTown</room>
+        <room>rooms\rDesertTownInside1_1</room>
+        <room>rooms\rDesertTownInside1_2</room>
+        <room>rooms\rDesertTownInside1_3</room>
+        <room>rooms\rDesertTownInside2_1</room>
+        <room>rooms\rDesertTownInside3_1</room>
+        <room>rooms\rDesertTownInside3_2</room>
+      </rooms>
+      <rooms name="Wastelands">
+        <room>rooms\rWastelands1</room>
+        <room>rooms\rWastelands2</room>
+        <room>rooms\rWastelands3</room>
+        <room>rooms\rWastelands4</room>
+        <room>rooms\rWastelands5</room>
+        <room>rooms\rWastelands6</room>
+        <room>rooms\rWastelands7</room>
+        <room>rooms\rWastelands8</room>
+        <room>rooms\rWastelands9</room>
+        <room>rooms\rWastelands10</room>
+        <room>rooms\rWastelandsBoss</room>
+        <room>rooms\rWastelandsTemplate</room>
+      </rooms>
+      <rooms name="Sky">
+        <room>rooms\rTreehouse1</room>
+        <room>rooms\rTreehouse2</room>
       </rooms>
     </rooms>
     <room>rooms\rTemplate</room>

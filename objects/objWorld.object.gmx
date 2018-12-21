@@ -31,6 +31,11 @@ if (instance_number(object_index) &gt; 1)
     instance_destroy();
     
 toggled = false;
+
+global.prevRoom = -1;
+global.currentRoom = room;
+
+//used to keep cloud's position in wasteland when you die
 </string>
           </argument>
         </arguments>
@@ -218,6 +223,13 @@ if (global.gameStarted)
                     alarm[0] = -1;   //reset alarm that pauses music
                 }
                 
+                if instance_exists(objTownTransition)
+                {
+                    with objTownTransition
+                    {
+                        instance_destroy()
+                    }
+                }
                 scrSaveGame(false); //save death/time
                 scrLoadGame(false); //load the game
             }
@@ -268,12 +280,6 @@ if (global.gameStarted)
           <argument>
             <kind>1</kind>
             <string>///debug keys
-
-
-if keyboard_check_pressed(vk_enter) and !instance_exists(objBoss1Spawn) and room = rBossGrasslands
-{
-    instance_create(400,400,objBoss1Spawn);
-}
 
 if (global.debugMode &amp;&amp; global.gameStarted &amp;&amp; !global.gamePaused)
 {
@@ -351,7 +357,7 @@ if (global.debugVisuals)
 }
 
 ///step by step
-
+/*
 if keyboard_check_pressed(vk_control)
 {
     toggled = true;
@@ -377,7 +383,7 @@ if toggled = false
 {
     room_speed = 50;   
 }
- 
+*/
            
 
 </string>
@@ -491,6 +497,14 @@ if (!instance_exists(objPlayMusic))  //make sure the play music object isn't in 
 
 room_speed = 50;    //make sure game is running at the correct frame rate
 scrSetRoomCaption();    //make sure window caption stays updated
+
+if !instance_exists(objExpController) and instance_exists(objPlayer)
+{
+    instance_create(0,0,objExpController);
+}
+
+global.prevRoom = global.currentRoom;
+global.currentRoom = room;
 </string>
           </argument>
         </arguments>
@@ -566,6 +580,7 @@ if (global.debugOverlay)
     scrDrawTextOutline(20,100,"Room number: "+string(room),c_black,c_white);
     scrDrawTextOutline(20,120,"God mode: "+string(global.debugNoDeath),c_black,c_white);
     scrDrawTextOutline(20,140,"Infinite jump: "+string(global.debugInfJump),c_black,c_white);
+
     scrDrawTextOutline(20,160,"FPS: "+string(fps),c_black,c_white);
     scrDrawTextOutline(20,180,"Real FPS: "+string(fps_real),c_black,c_white);
 }

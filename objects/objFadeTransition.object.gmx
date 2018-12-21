@@ -25,12 +25,45 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>roomTo = rTemplate;
-spd = 0.008;
-spd2 = 0;
+            <string>x = view_xview[0];
+y = view_yview[0];
+
+global.transitioning = true;
+roomTo = rTemplate;
+spd = 0.008; //fade in speed
+spd2 = 0; //fade out speed (will be the same as fade in speed if left at 0)
 fadein = true;
 alpha = 0;
 image_alpha = alpha;
+targetX = 0;
+targetY = 0;
+wait = 0; //how long the screen will stay full black for
+saveAfterTransition = false;
+
+count = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.transitioning = false;
 </string>
           </argument>
         </arguments>
@@ -53,7 +86,9 @@ image_alpha = alpha;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_alpha = alpha;
+            <string>count = instance_number(objFadeTransition);
+
+image_alpha = alpha;
 if alpha &lt; 1 &amp;&amp; fadein = true
 {
     alpha += spd ;
@@ -61,7 +96,16 @@ if alpha &lt; 1 &amp;&amp; fadein = true
 else if alpha &gt;= 1
 {
     room_goto(roomTo);
-    fadein = false;
+    
+    if wait &lt;= 0
+    {
+        fadein = false;
+    }
+    else
+    {
+        wait -= 1;
+    }
+    
     with objPlayer
     {
         instance_destroy();
@@ -69,6 +113,19 @@ else if alpha &gt;= 1
 }
 if fadein = false
 {
+    if !instance_exists(objPlayer)
+    {
+        if (targetX != 0 or targetY != 0)
+        {       
+            instance_create(targetX,targetY,objPlayer);
+        }
+    }
+    if saveAfterTransition = true and instance_exists(objPlayer)
+    {
+        scrSaveGame(true);
+        saveAfterTransition = false;
+    }
+    
     if spd2 = 0
     {
         alpha -= spd / 1.5;
@@ -77,6 +134,7 @@ if fadein = false
     {
         alpha -= spd2 / 1.5;
     }
+    
     if alpha &lt;= 0
     {
         instance_destroy();
